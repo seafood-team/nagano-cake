@@ -1,7 +1,5 @@
 class Admin::CustomersController < ApplicationController
-  before_action :authenticate_admin!
-  before_action :set_customer, only: %i[show update]
-
+  
   def index
     @customers = Customer.latest
   end
