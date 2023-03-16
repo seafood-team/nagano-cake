@@ -11,19 +11,25 @@ devise_for :customers, controllers: {
   passwords:     'public/passwords',
   registrations: 'public/registrations'
 }
-  
+
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
     get "/" => "homes#top"
 
   end
 
-  
+
   scope module: :public do
     resource :customers, only: [:show, :update, :edit]
     patch "/customers/withdraw" => "customers#withdraw"
 
 
+    end
+
+    resources :orders, only: %i[index show] do
+     collection do
+       get 'success'
+     end
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
