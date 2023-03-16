@@ -21,11 +21,11 @@
         </tr>
         <tr>
           <th class="table-active">フリガナ</th>
-          <td><%#= @customer.last_name_kana + @customer.first_name_kana %></td>
+          <td><%= @customer.last_name_kana + @customer.first_name_kana %></td>
         </tr>
         <tr>
           <th class="table-active">郵便番号</th>
-          <td><%= @customer.postcode %></td>
+          <td><%= @customer.post_code %></td>
         </tr>
         <tr>
           <th class="table-active">住所</th>
@@ -33,7 +33,7 @@
         </tr>
         <tr>
           <th class="table-active">電話番号</th>
-          <td><%#= @customer.telephone %></td>
+          <td><%= @customer.telephone %></td>
         </tr>
         <tr>
           <th class="table-active">メールアドレス</th>
