@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   devise_for :admin, controllers: {
   sessions:      'admin/sessions',
   passwords:     'admin/passwords',
-}
-devise_for :customers, controllers: {
-  sessions:      'public/sessions',
-  passwords:     'public/passwords',
-  registrations: 'public/registrations'
-}
+  }
+  devise_for :customers, controllers: {
+    sessions:      'public/sessions',
+    passwords:     'public/passwords',
+    registrations: 'public/registrations'
+  }
 
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
@@ -20,15 +20,11 @@ devise_for :customers, controllers: {
 
   scope module: :public do
     resource :customers, only: [:show, :update, :edit]
+    resources :products, only: [:index, :show]
     patch "/customers/withdraw" => "customers#withdraw"
 
 
-    end
+  end
 
-    resources :orders, only: %i[index show] do
-     collection do
-       get 'success'
-     end
-    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
