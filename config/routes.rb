@@ -25,6 +25,10 @@ devise_for :customers, controllers: {
     resources :carts, only: [:index, :update, :destroy, :create] 
 
     end
+    
+    scope module: :public do
+   resources :products, only: [:index, :show]
+ end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

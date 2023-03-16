@@ -1,0 +1,13 @@
+<div class="container">
+  <%= image_tag @product.image %>
+  
+  <%= @product.name %>
+  <p><%= number_to_currency(@product.price, unit: "¥", strip_insignificant_zeros: true) %></p>
+  <p><%= @product.description %></p>
+  
+  <% if @product.stock > 0 %>
+    <span>In Stock Now(<%= @product.stock %>)</span>
+  <% else %>
+    <span>Out of Stock</span>
+  <% end %>
+</div>
