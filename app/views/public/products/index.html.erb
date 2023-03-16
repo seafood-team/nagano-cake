@@ -1,0 +1,24 @@
+<div class="container">
+  <span>
+    商品一覧
+  </span>
+</div>
+
+<%= link_to '最新', product_path(latest: true) %>
+
+<%= link_to '価格が高い順', products_path(price_high_to_low: true) %>
+
+<%= link_to '価格が低い順', products_path(price_low_to_high: true) %>
+
+<% @products.each do |product| %>
+  <%= link_to product_path(product) do %>
+    <%= image_tag product.image %>
+    <p><%= product.name %></p>
+    <p><%= number_to_currency(product.price, unit: "¥", strip_insignificant_zeros: true %></p>
+    <% if product.stock > 0 %>
+      <span>In Stock Now</span>
+    <% else %>
+     <span>Out of Stock</span>
+    <% end %>
+  <% end %>
+<% end %>

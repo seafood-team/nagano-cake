@@ -25,5 +25,9 @@ devise_for :customers, controllers: {
 
 
     end
+    
+    scope module: :customer do
+   resources :products, only: %i[index show]
+ end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
