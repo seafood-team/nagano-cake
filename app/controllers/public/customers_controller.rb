@@ -25,4 +25,6 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     @customer.update
   end
+  
+  
 end
