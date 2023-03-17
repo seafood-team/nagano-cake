@@ -13,6 +13,7 @@ class Public::CustomersController < ApplicationController
     @customer.withdrawal_status = true
     if @customer.save
       reset_session
+      flash[:notice] = "退会しました。またのご利用お待ちしております"
       redirect_to root_path
     end
   end
