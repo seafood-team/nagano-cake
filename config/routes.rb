@@ -21,10 +21,13 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :customers, only: [:show, :update, :edit]
     resources :products, only: [:index, :show]
+    resources :shipping_addresses, only: [:index, :create, :edit, :update, :destroy]
+    resources :orders, only: [:new ,:index , :create, :show]
+    post 'order/check' => 'orders#check'
+    get 'order/thanks' => 'orders#thanks'
     patch "/customers/withdraw" => "customers#withdraw"
 
-
   end
 
-  end
+end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

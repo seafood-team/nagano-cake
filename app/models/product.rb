@@ -1,6 +1,5 @@
 class Product < ApplicationRecord
-
-  has_many :carts
+  
   has_many :order_details
   
   has_one_attached :image

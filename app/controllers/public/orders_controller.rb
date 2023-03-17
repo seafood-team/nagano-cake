@@ -1,43 +1,12 @@
 class Public::OrdersController < ApplicationController
 
-  # 購入情報の入力画面で、宛先や住所などを入力するところです
   def new
     @order = Order.new
   end
 
-  # 購入を確定します
-  def create # Order に情報を保存します
-    carts = current_customer.carts.all
-  # ログインユーザーのカートアイテムをすべて取り出して cart_items に入れます
-    @order = current_customer.orders.new(order_params)
-  # 渡ってきた値を @order に入れます
-    if @order.save
-  # ここに至るまでの間にチェックは済ませていますが、念の為IF文で分岐させています
-      carts.each do |cart|
-  # 取り出したカートアイテムの数繰り返します
-  # order_item にも一緒にデータを保存する必要があるのでここで保存します
-        order_detail = OrderDetail.new
-        order_detail.product_id = cart.product_id
-        order_detail.order_id = @order.id
-        order_detail.order_quantity = cart.quantity
-  # 購入が完了したらカート情報は削除するのでこちらに保存します
-        order_detail.order_price = cart.product.price
-  # カート情報を削除するので item との紐付けが切れる前に保存します
-        order_detail.save
-      end
-      redirect_to 遷移したいページのパス
-      cart_items.destroy_all
-  # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除します(カートを空にする)
-    else
-      @order = Order.new(order_params)
-      render :new
-    end
-  end
-
-  # new 画面から渡ってきたデータをユーザーに確認してもらいます
   def check
     @order = Order.new(order_params)
-  # new 画面から渡ってきたデータを @order に入れます
+    # new 画面から渡ってきたデータを @order に入れる
     if params[:order][:address_number] == "1"
   # view で定義している address_number が"1"だったときにこの処理を実行します
   # form_with で @order で送っているので、order に紐付いた address_number となります。以下同様です
@@ -68,6 +37,23 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用します
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
   # 合計金額を出す処理です sum_price はモデルで定義したメソッドです
+
+  end
+
+  def index
+
+  end
+
+  def show
+    @product = Product.find(params[:product_id])
+    @order = @product.order.new
+  end
+
+  def create
+    @product = Product.find(params[:product_id])
+    @order = @product.order.new(order_params)
+    @order.save
+    redirect_to products_path
   end
 
   private
@@ -78,5 +64,12 @@ class Public::OrdersController < ApplicationController
 
   def address_params
     params.require(:order).permit(:name, :address)
+  end
+
+  def order_params
+    params.require(:order)
+    .permit(:amount,
+            :quantity,
+            :product_id)
   end
 end

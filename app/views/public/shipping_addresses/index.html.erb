@@ -1,0 +1,52 @@
+
+<h2>配送先登録/一覧</h2>
+
+<!--shipping_addressに送信する-->
+<%= form_with model: @shipping_address do |f| %>
+
+  <div>
+    <%= f.label :"郵便番号(ハイフンなし)" %>
+    <%= f.text_field :shipping_post_code, autofocus: true%>
+  </div>
+
+  <div>
+    <%= f.label :"住所" %>
+    <%= f.text_field :shipping_address, autofocus: true%>
+  </div>
+
+  <div>
+    <%= f.label :"宛名" %>
+    <%= f.text_field :shipping_name, autofocus: true %>
+  </div>
+
+  <div><%= f.submit "新規登録" %></div>
+<% end %>
+
+<table class="table table-hover table-inverse">
+
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">郵便番号</th>
+      <th scope="col">住所</th>
+      <th scope="col">宛名</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shipping_addresses.each do |address| %>
+    <tr>
+      <td>
+
+      </td>
+
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
