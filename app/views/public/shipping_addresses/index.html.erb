@@ -1,3 +1,4 @@
+<%= render 'layouts/errors', obj: @shipping_address %>
 
 <h2>配送先登録/一覧</h2>
 
@@ -26,7 +27,6 @@
 
   <thead>
     <tr>
-      <th scope="col"></th>
       <th scope="col">郵便番号</th>
       <th scope="col">住所</th>
       <th scope="col">宛名</th>
@@ -36,17 +36,25 @@
   <tbody>
     <% @shipping_addresses.each do |address| %>
     <tr>
+      <!--郵便番号-->
+      <td><%= address.shipping_post_code %></td>
+
+      <!--住所-->
+      <td><%= address.shipping_address %></td>
+
+      <!--宛名-->
+      <td><%= address.shipping_name %></td>
+
+      <!--editページへ飛ぶ-->
+      <td><%= link_to "編集", edit_shipping_address_path(address.id), class:"btn btn-success px-4 mb-2" %></td>
+
+      <!--配送先を削除する-->
       <td>
-
+        <%= link_to "削除", shipping_address_path(address.id), method: :delete,
+        "data-confirm" => "本当に削除しますか？" ,class:"btn btn-success px-4 mb-2" %>
       </td>
-
-      <td>
-
-      </td>
-      <td>
-
-      </td>
-
     </tr>
     <% end %>
   </tbody>
+
+</table>
