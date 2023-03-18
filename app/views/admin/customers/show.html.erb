@@ -1,0 +1,45 @@
+<div class="container">
+
+  <h2><%= @cutomers.last_name + @customers.first_name %>さんの会員詳細</h2>
+  
+  <table>
+    <tbody>
+    <tr>
+      <th scope="row">会員ID</th>
+      <td><%= cuttomer.id %></td>
+    </tr>
+    <tr>
+      <th scope="row">氏名</th>
+      <td><%= @cutomers.last_name + @customers.first_name %></td>
+    </tr>
+    <tr>
+      <th scope="row">フリガナ</th>
+      <td><%= <%= @customers.last_name_kana + @customers.first_name_kana %> %></td>
+    </tr>
+    <tr>
+      <th scope="row">郵便番号</th>
+      <td><%= <%= @customers.post_code %> %></td>
+    </tr>
+     <tr>
+      <th scope="row">住所</th>
+      <td><%= <%= @customers.city %> %></td>
+    </tr>
+     <tr>
+      <th scope="row">電話番号</th>
+      <td><%= <%= @customers.telephone %> %></td>
+    </tr>
+     <tr>
+      <th scope="row">メールアドレス</th>
+      <td><%= <%= @customers.email %> %></td>
+    </tr>
+     <tr>
+      <th scope="row">会員ステータス</th>
+      <td><%#= <%= @customers. %> %></td>
+    </tr>
+  </tbody>
+  </table>
+  
+  <%= link_to "編集する", edit_admin_customer_path(c@ustomesr.id) %>
+  
+  <%#= link_to "注文履歴一覧を見る",  %>
+</div>

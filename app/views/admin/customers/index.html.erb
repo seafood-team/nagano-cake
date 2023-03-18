@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>会員一覧</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <%= @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= link_to @customer.first_name + @cutomer.last_name, admin_customer_path(customer) %></td>
+        <td><%= customer.email %></td>
+        <td>
+          <% if customer.status === "normal" %>
+            <span class="text-success">Normal</span>
+          <% elsif customer.status === "withdraw" %>
+            <span>Withdraw</span>
+          <% else %>
+            <span>Banned</span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+ 
+ 
+  
+  
+  
+</div>
