@@ -50,7 +50,7 @@
 
       <!--配送先を削除する-->
       <td>
-        <%= link_to "削除", shipping_address_path(address.id), method: :delete,
+        <%= button_to "削除", shipping_address_path(address.id), method: :delete,
         "data-confirm" => "本当に削除しますか？" ,class:"btn btn-success px-4 mb-2" %>
       </td>
     </tr>
