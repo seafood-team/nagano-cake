@@ -23,6 +23,7 @@ devise_for :customers, controllers: {
     patch "/customers/withdraw" => "customers#withdraw"
 
     resources :carts, only: [:index, :update, :destroy, :create] 
+    delete "/carts/destroy_all" => "carts#destroy_all"
 
     end
     

@@ -10,4 +10,14 @@
   <% else %>
     <span>Out of Stock</span>
   <% end %>
+  
+  <p>数量を選択して下さい</p>
+  <%= form_with model:@cart, url:carts_path,method: :post  do |f| %>
+    <%= f.hidden_field :product_id,:value => @product.id %>
+    <%= f.hidden_field :customer_id,:value => current_customer.id %>
+    <%= f.label :amount, "個数選択" %>
+    <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],required:true %>
+    <%= f.submit 'カートに入れる' %>
+  <% end %>    
+  
 </div>

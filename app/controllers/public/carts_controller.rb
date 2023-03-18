@@ -3,36 +3,42 @@ class Public::CartsController < ApplicationController
   
   def index
     @carts = current_customer.carts.all
+    @total = 0
   end
   
   def update
     cart = Cart.find(params[:id])
-    cart.update(cart_params)
-    redirect_to carts_path
+    cart.update(amount: (params[:cart][:amount]).to_i)
+    redirect_to request.referer
   end
   
   def destroy
     cart = Cart.find(params[:product_id])
     cart.destroy
-    redirect_to carts_path
+    redirect_to request.referer
   end
   
   def destroy_all
     current_customer.carts.destroy_all
+    redirect_to request.referer
   end
   
   def create
-    if current_customer.carts.find_by(product_id)
-      cart.amount += params[:amount].to_i
+    if current_customer.carts.find_by(product_id: params[:cart][:product_id]).present?
+      cart = current_customer.carts.find_by(product_id: params[:cart][:product_id])
+      cart.amount += (params[:cart][:amount]).to_i
+      cart.save
+      redirect_to carts_path
     else
       current_customer.carts.build(product_id:).save
+      redirect_to carts_path
     end
       
   end
   
   private
   def cart_params
-      params.require(:cart).permit(:product_id, :amount)
+      params.require(:cart).permit(:product_id, :amount, :customer_id)
   end
 
 end

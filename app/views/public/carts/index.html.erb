@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <h1>ショッピングカート</h1>
-  
+  <%= link_to "カートを空にする", carts_destroy_all_path, method: :delete %>
+
   <table class ="table">
     <thead>
       <tr>
@@ -14,12 +15,29 @@
     <tbody>
       <% @carts.each do |cart| %>
       <tr>
-        <td><%= cart.product.product_name %></td>
-        <td><%= (cart.product.with_tax_price).floor %></td>
-        <td></td>
-        <td><%= (cart.subtotal %></td>
-        <td><%= link_to "削除する", cart_path(@cart), method: :delete %></td>
+        <td>
+          <%= image_tag cart.product.image %>
+          <%= cart.product.product_name %>
+        </td>
+        <td><%= cart.product.with_tax_price %></td>
+        <td>
+          <%= form_with model: cart, url:cart_path(cart),method: :patch do |f| %>
+            <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],required:true %>
+            <%= f.submit "変更" %>
+          <% end %>
+        </td>
+        <td><%= cart.subtotal %></td>
+        <td><%= link_to "削除する", cart_path(cart.id, cart), method: :delete %></td>
       </tr>
+      <% @total += cart.subtotal %>
+      <% end %>
     </tbody>
+     <tr>
+       <th>合計金額</th>
+       <td><%= @total %></td>
+     </tr>
   </table>
+  <%= link_to "買い物を続ける",products_path %>
+  <p>情報入力に進む</p>
+
 </html>
