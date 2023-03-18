@@ -7,10 +7,10 @@ class Product < ApplicationRecord
   scope :price_high_to_low, -> { order(price: :desc) }
   scope :price_low_to_high, -> { order(price: :asc) }
 
-   def with_tax_price
-    (no_tax * 1.1).floor
- 　 end
+  def with_tax_price
+   (no_tax * 1.1).floor
+  end
  　
- 　has_many :carts, dependent: :destroy
+  has_many :carts, dependent: :destroy
 
 end
