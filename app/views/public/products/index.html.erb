@@ -14,7 +14,7 @@
   <%= link_to products_path(product) do %>
     <p><%= product.name %></p>
     <span><%= number_to_currency(producr.price, unit: "¥", strip_insignificant_zeros: true) %></span>
-      
+
     <% if product.stock > 0 %>
       <span>In Stock Now</span>
     <% else %>
