@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     get "/" => "homes#top"
     resources :products, only: [:index, :new, :show, :edit, :update]
-    resources :customers, only: [:index, :show, :update]
   end
 
 

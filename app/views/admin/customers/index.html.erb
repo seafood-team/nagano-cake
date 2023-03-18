@@ -12,28 +12,21 @@
     </thead>
     
     <tbody>
-      <%= @customers.each do |customer| %>
+      <% @customers.each do |customer| %>
       <tr>
         <td><%= customer.id %></td>
-        <td><%= link_to @customer.first_name + @cutomer.last_name, admin_customer_path(customer) %></td>
+        <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %></td>
         <td><%= customer.email %></td>
         <td>
-          <% if customer.status === "normal" %>
-            <span class="text-success">Normal</span>
-          <% elsif customer.status === "withdraw" %>
-            <span>Withdraw</span>
+          <% if customer.updated_at == nil %>
+            有効
           <% else %>
-            <span>Banned</span>
+            退会
           <% end %>
         </td>
       </tr>
+      <% end %>
     </tbody>
   </table>
-  
-  
- 
- 
-  
-  
   
 </div>
