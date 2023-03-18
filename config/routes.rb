@@ -14,18 +14,21 @@ devise_for :customers, controllers: {
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
     get "/" => "homes#top"
+    resources :products, only: [:index, :new, :show, :edit, :update]
 
   end
 
   
   scope module: :public do
     resource :customers, only: [:show, :update, :edit]
-    patch "/customers/withdraw" => "customers#withdraw"
+    get "/customers/unsubscribe" => "customers#unsubscribe"
+    get "/customers/withdraw" => "customers#withdraw"
+    
 
 
     end
     
-    scope module: :public do
+   scope module: :public do
    resources :products, only: [:index, :show]
  end
   end

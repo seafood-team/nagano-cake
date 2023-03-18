@@ -26,9 +26,9 @@
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
               <li class="nav-item">
-                <%#= link_to admin_items_path do %>
+                <%= link_to admin_products_path do %>
                   <i class="fas fa-birthday-cake">商品一覧</i>
-                <%# end %>
+                <% end %>
               </li>
               <li class="nav-item">
                 <%#= link_to admin_customers_path do %>
