@@ -1,2 +1,42 @@
-<h1>Admin#products#index</h1>
-<p>Find me in app/views/admin/products//index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>商品一覧</h2>
+    </div>
+    <div class="col-sm-2 px-sm-0" >
+        <%= link_to new_admin_product_path do %>
+        <i class="fas fa-wrench">商品説明</i>
+        <% end %>
+    </div>
+    <div class="row">
+        <div class"col-sm-2 px-sm-0">
+            <table class= "table text-center admin-products">
+                <thead>
+                    <tr>
+                        <th>商品ID</th>
+                        <th>商品名</th>
+                        <th>税抜価格</th>
+                        <th>ジャンル</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <% @products.each do |product| %>
+                <tbody>
+                    <tr>
+                        <tb><% product.id %></tb>
+                        <tb><% product.name %></tb>
+                        <tb></tb>
+                        <tb><% product.genre.name %></tb>
+                        <% if product.sales_status == true %>
+                        <p>販売中</p>
+                        <% eles %>
+                        <p>売り切れ</p>
+                        <% end %>
+                    </tr>
+                </tbody>
+                <% end %>
+            </table>
+        </div>
+            
+        
+    </div>
