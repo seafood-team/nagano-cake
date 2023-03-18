@@ -1,10 +1,19 @@
-<h2>注文確認画面</h2>
-  <%= @order.amount %>
-  <%= @order.quantity %>
-  <%= @item.name %>
-  <%= @item.price %>
-<%= form_with model:[@item, @order], url:(item_order_path) do |f| %>
-  <%= f.hidden_field :amount %>
-  <%= f.hidden_field :quantity %>
-  <%= f.submit %>
+<!-- 注文情報確認画面 -->
+<% @cart_products.each do |cart| %>
+  <%= cart.product.name %> <!-- 商品名 -->
+  <%= (cart.product.price).to_s(:delimited) %>　<!-- 金額 -->
+  <%= cart.amount %> <!-- 個数 -->
+  <%= (cart.product.price*cart.amount).to_s(:delimited) %> <!-- 小計 -->
+<% end %>
+<p>ご請求金額</p>
+<%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 -->
+<p>お届け先</p>
+<%= @order.address %>
+
+<!-- ユーザーには注文確定ボタンだけ表示 -->
+<%= form_with model: @order, url: 'order/create', local: true do |f| %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :address %>
+  <%= f.hidden_field :total_price, value: @total %>
+  <%= f.submit "注文を確定する" %>
 <% end %>

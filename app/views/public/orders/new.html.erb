@@ -4,30 +4,47 @@
 <h3>支払方法</h3>
 <!-- クレジットカードで支払う場合 -->
 <div>
-  <%= f.radio_button :payment_method, 1 %> <!-- payment_method と定義して1～2の番号を check に送ります -->
-  <%= f.label :payment_method_1, "クレジットカード" %>
+  <%= f.radio_button :payment_number, 1 %> <!-- payment_number と定義して1～2の番号を check に送ります -->
+  <%= f.label :payment_number_1, "クレジットカード" %>
 </div>
 <!-- 銀行振込の場合 -->
 <div>
-  <%= f.radio_button :payment_method, 2 %>
-  <%= f.label :payment_method_2, "銀行振込" %>
+  <%= f.radio_button :payment_number, 2 %>
+  <%= f.label :payment_number_2, "銀行振込" %>
 </div>
+
+
 
 <h3>お届け先</h3>
 
 <!-- 顧客の住所の場合 -->
 <div>
-  <%= f.radio_button :adress, 1 %> <!-- payment_method と定義して1～2の番号を check に送ります -->
-  <%= f.label :adress_1, "ご自身の住所" %>
+  <%= f.radio_button :address_number, 1 %><!-- address_number と定義して1～3の番号を check に送ります -->
+  <%= f.label :address_number_1, "ご自身の住所" %><br>
+  <!--郵便番号-->
+  <%= current_customer.post_code %>
+  <!--住所-->
+  <%= current_customer.city %>
 </div>
 
 <!--登録済みの住所から選ぶ場合-->
 <div>
-  <%= f.radio_button :adress, 1 %> <!-- payment_method と定義して1～2の番号を check に送ります -->
-  <%= f.label :adress_1, "ご自身の住所" %>
+  <%= f.radio_button :address_number, 2 %>
+  <%= f.label :address_number_2, "登録済み住所から選択" %><br>
+  <!--配送先住所一覧-->
+  <%= f.collection_select(:registered, @shipping_address, :id, :shipping_address) %>
 </div>
 
 <!--新しいお届け先を追加する場合-->
+  <%= f.radio_button :address_number, 3 %>
+  <%= f.label :address_number_3, "新しいお届け先" %><br>
+
+  <%= f.label :post_code, "郵便番号" %>
+  <%= f.text_field :post_code %><br>
+  <%= f.label :address, "住所" %>
+  <%= f.text_field :address %><br>
+  <%= f.label :customer_name, "宛名" %>
+  <%= f.text_field :customer_name %><br>
 
 <!-- 選んでもらったデータを送ります -->
   <%= f.submit "確認画面へ進む" %>

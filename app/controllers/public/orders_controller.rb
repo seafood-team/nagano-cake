@@ -2,74 +2,90 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @shipping_address = ShippingAddress.all
+  end
+
+  def create # Order に情報を保存
+
+    # ログインユーザーのカートアイテムをすべて取り出して carts に入れる
+    carts = current_customer.carts.all
+    # 渡ってきた値を @order に入れる
+    @order = current_customer.orders.new(order_params)
+    if @order.save
+
+      carts.each do |cart|
+
+      # order_details にも一緒にデータを保存する必要があるのでここで保存
+        order_details = OrderDetails.new
+        order_details.product_id = cart.product_id
+        order_details.order_id = @order.id
+        # 購入が完了したらカート情報は削除するのでこちらに保存
+        order_details.order_amount = cart.amount
+        order_details.order_price = cart.product.no_tax
+
+        order_details.save
+      end
+      redirect_to order_check_path
+      # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
+      cart_products.destroy_all
+    else
+      @order = Order.new(order_params)
+      render :new
+    end
   end
 
   def check
     @order = Order.new(order_params)
+
+    if params[:order][:payment_number] == "1"# view で定義している payment_number が"1"だったときにこの処理を実行
+
+    elsif params[:order][:payment_number] == "2"
+
+    else
+      redirect_to order_thanks_path
+    end
     # new 画面から渡ってきたデータを @order に入れる
-    if params[:order][:address_number] == "1"
-  # view で定義している address_number が"1"だったときにこの処理を実行します
-  # form_with で @order で送っているので、order に紐付いた address_number となります。以下同様です
-  # この辺の紐付けは勉強不足なので gem の pry-byebug を使って確認しながら行いました
-      @order.name = current_customer.name # @order の各カラムに必要なものを入れます
+    if params[:order][:address_number] == "1"# view で定義している address_number が"1"だったときにこの処理を実行
+
+    # 登録済みの住所を保存
+      @order.customer_name = current_customer.shipping_name
       @order.address = current_customer.customer_address
-    elsif params[:order][:address_number] == "2"
-  # view で定義している address_number が"2"だったときにこの処理を実行します
-      if Address.exists?(name: params[:order][:registered])
-  # registered は viwe で定義しています
-        @order.name = Address.find(params[:order][:registered]).name
+      @order.post_code = current_customer.post_code
+
+    elsif params[:order][:address_number] == "2" # address_number が"2"だったときにこの処理を実行
+
+      if Address.exists?(customer_name: params[:order][:registered])
+
+        # 追加した新しいお届け先を保存
+        @order.customer_name = Address.find(params[:order][:registered]).customer_name
         @order.address = Address.find(params[:order][:registered]).address
+        @order.post_code = Address.find(params[:order][:registered]).post_code
       else
         render :new
-  # 既存のデータを使っていますのでありえないですが、万が一データが足りない場合は new を render します
       end
-    elsif params[:order][:address_number] == "3"
-  # view で定義している address_number が"3"だったときにこの処理を実行します
+    elsif params[:order][:address_number] == "3"# address_number が"3"だったときにこの処理を実行
+
       address_new = current_customer.addresses.new(address_params)
-      if address_new.save # 確定前(確認画面)で save してしまうことになりますが、私の知識の限界でした
+      if address_new.save
       else
         render :new
-  # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻します
       end
     else
-      redirect_to 遷移したいページ # ありえないですが、万が一当てはまらないデータが渡ってきた場合の処理です
+      redirect_to order_thanks_path
     end
-    @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用します
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
-  # 合計金額を出す処理です sum_price はモデルで定義したメソッドです
+    @cart_products = current_customer.cart_products.all # カートアイテムの情報をユーザーに確認してもらうために使用
+    @total = @cart_products.inject(0) { |sum, product| sum + product.subtotal }# 合計金額を出す処理です subtotal はモデルで定義したメソッド
 
-  end
-
-  def index
-
-  end
-
-  def show
-    @product = Product.find(params[:product_id])
-    @order = @product.order.new
-  end
-
-  def create
-    @product = Product.find(params[:product_id])
-    @order = @product.order.new(order_params)
-    @order.save
-    redirect_to products_path
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:name, :address, :total_price)
+    params.require(:order).permit(:customer_name, :address, :shipping_cost)
   end
 
   def address_params
-    params.require(:order).permit(:name, :address)
+    params.require(:order).permit(:customer_name, :address)
   end
 
-  def order_params
-    params.require(:order)
-    .permit(:amount,
-            :quantity,
-            :product_id)
-  end
 end
