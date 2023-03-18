@@ -26,7 +26,7 @@
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
               <li class="nav-item">
-                <%= link_to admin_items_path do %>
+                <%= link_to admin_products_path do %>
                   <i class="fas fa-birthday-cake">商品一覧</i>
                 <% end %>
               </li>
@@ -65,7 +65,9 @@
                   <i class="fas fa-user">マイページ</i>
                 <% end %>
               </li>
-              <li class="nav-item">
+
+              <li class="nav-item">             
+
                 <%= link_to  products_path do %>
                   <i class="fas fa-birthday-cake">商品一覧</i>
                 <% end %>
@@ -88,9 +90,9 @@
                 <%# end %>
               </li>
               <li class="nav-item">
-                <%#= link_to products_path do %>
+                <%= link_to products_path do %>
                   <i class="fas fa-birthday-cake">商品一覧</i>
-                <%# end %>
+                <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to new_customer_registration_path, data: {"turbolinks" => false} do %>
