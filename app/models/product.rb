@@ -12,5 +12,16 @@ class Product < ApplicationRecord
   end
  
   has_many :carts, dependent: :destroy
-
+  
+  def get_product_image
+    (producte_image.attached?) ? product_image : 'no_image.jpg'
+  end
+  
+  with_options presence: true do
+  validates :product_name
+  validates :introduct
+  validates :no_tax
+  validates :image
+  validates :sale_status
+  end
 end

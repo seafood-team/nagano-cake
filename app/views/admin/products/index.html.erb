@@ -25,7 +25,7 @@
                     <tr>
                         <tb><% product.id %></tb>
                         <tb><% product.name %></tb>
-                        <tb></tb>
+                        <tb><%= item.no_tax %></tb>
                         <tb><% product.genre.name %></tb>
                         <% if product.sales_status == true %>
                         <p>販売中</p>
@@ -37,6 +37,6 @@
                 <% end %>
             </table>
         </div>
-            
+        <%= paginate @products %>
         
     </div>
