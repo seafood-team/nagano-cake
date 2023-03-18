@@ -21,7 +21,7 @@ devise_for :customers, controllers: {
   scope module: :public do
     resource :customers, only: [:show, :update, :edit]
     get '/customers/unsubscribe' => 'customers#unsubscribe' 
-    patch '/customers/withdraw' => 'customers#withdraw'
+    get '/customers/withdraw' => 'customers#withdraw'
 
 
     end
