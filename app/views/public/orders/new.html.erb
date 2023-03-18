@@ -16,8 +16,16 @@
 <h3>お届け先</h3>
 
 <!-- 顧客の住所の場合 -->
+<div>
+  <%= f.radio_button :adress, 1 %> <!-- payment_method と定義して1～2の番号を check に送ります -->
+  <%= f.label :adress_1, "ご自身の住所" %>
+</div>
 
 <!--登録済みの住所から選ぶ場合-->
+<div>
+  <%= f.radio_button :adress, 1 %> <!-- payment_method と定義して1～2の番号を check に送ります -->
+  <%= f.label :adress_1, "ご自身の住所" %>
+</div>
 
 <!--新しいお届け先を追加する場合-->
 
