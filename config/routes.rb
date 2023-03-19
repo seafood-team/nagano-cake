@@ -14,12 +14,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
     get "/" => "homes#top"
-<<<<<<< HEAD
-    resources :products, only: [:index, :new, :show, :edit, :update]
-=======
     resources :products, only: [:index, :new, :show, :create, :edit, :update]
     resources :genres, only: [:index, :edit, :create, :update]
->>>>>>> origin/develop
   end
 
 
