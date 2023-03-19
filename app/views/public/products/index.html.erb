@@ -12,14 +12,10 @@
 
 <% @product.each do |product| %>
   <%= link_to products_path(product) do %>
-    <p><%= product.name %></p>
-    <span><%= number_to_currency(producr.price, unit: "¥", strip_insignificant_zeros: true) %></span>
+  <%= image_tag %>
+    <p><%= product.product_name %></p>
+    <span><%= number_to_currency(product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></span>
 
-    <% if product.stock > 0 %>
-      <span>In Stock Now</span>
-    <% else %>
-      <span>Out of Stock</span>
-    <% end %>
   <% end %>
 <% end %>
 </div>
