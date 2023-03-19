@@ -4,7 +4,7 @@ class Admin::CustomersController < ApplicationController
     @customers = Customer.latest
   end
 
-  def show; 
+  def show
   end
 
   def update

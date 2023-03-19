@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   
 
   has_many :order_details
+  belongs_to :genre
   
   has_one_attached :image
   scope :price_high_to_low, -> { order(price: :desc) }
@@ -13,15 +14,15 @@ class Product < ApplicationRecord
  
   has_many :carts, dependent: :destroy
   
-  def get_product_image
-    (producte_image.attached?) ? product_image : 'no_image.jpg'
+  def get_image
+    (image.attached?) ? image : 'no_image.jpg'
   end
   
   with_options presence: true do
   validates :product_name
   validates :introduct
   validates :no_tax
-  validates :image
+  validates :genre
   validates :sale_status
   end
 end

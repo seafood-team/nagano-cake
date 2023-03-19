@@ -5,16 +5,52 @@
     </div>
   </div>
    <div class="row">  
-   <%= form_with model: @product, url: admin_product_path, local: true do |f| %>
-   <h2><strong><%= @product.name %></strong></h2>
-      <h4><%= simple_format(@product.description)%></h4>
-      <%  if @product.sales_status == true %>
-        <p class="text-success">販売中</p>
-        <h3>¥ <%= no_tax( @product.no_tax) %> (税込)</h3>
-      <% else %>
-        <h3 class="text-danger">販売停止中です</h3>
-      <% end %>
-      <%= link_to "編集する", edit_admin_product_path %>
-      </div> 
-  </div>
+   <%= form_with model: @product, url: admin_product_path, method: :patch, local: true do |f| %>
+   <table>
+            <tr>
+                <div class= "from-group">
+                    <th><% f.label :商品画像 %></th>
+                    <th><%= f.file_field :image, accept: 'image/*' %></th>
+                </div>
+            </tr>
+            <tr>
+                <div class= "from-group">
+                    <th><%= f.label :商品名 %></th>
+                    <td><%= f.text_field :product_name, placeholder:"商品名" %></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><% f.label :商品説明文 %></th>
+                    <td><%= f.text_area :introduct, size: "50x8", placeholder:"ここにケーキ類などの説明文を記述します" %></td>
+                </div>
+            </tr>
+            <tr>
+                <th><%= f.label :ジャンル %></th>
+                <td><%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => "--選択してください--" %></td>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :税抜価格 %></th>
+                    <td><%= f.text_field :no_tax, placeholder:"0000" %>円</td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :販売ステータス %></th>
+                    <td><%= f.radio_button :sale_status, true, checked: true %>
+                    <%= f.label :sale_status, "販売中" %>
+                    <%= f.radio_button :sale_status, false %>
+                    <%= f.label :sale_status, "販売停止中" %>
+                    </td>
+                </div>
+            </tr>
+            <tr>
+              <div class="form-action">
+                <td><%= f.submit "変更を保存" %></td>
+              </div>
+            </tr>
+            <% end %>
+   </table>
+   </div>
 </div>
