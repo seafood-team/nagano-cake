@@ -6,7 +6,7 @@ class Public::ProductsController < ApplicationController
   end
   
   def index
-    @product, @sort = get_products(params)
+    @product = Product.all
   end
   
   private
