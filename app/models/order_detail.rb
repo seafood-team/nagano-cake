@@ -9,11 +9,11 @@ class OrderDetail < ApplicationRecord
     finish_making: 3
   }
   
-  def price  #カラムの中の税込価格を計算（自信ない）
+  def price  #カラムの中の税込価格を計算（わからない）
     (no_tax * 1.1).floor
   end
   
-  def order_subtotal_price
+  def order_subtotal_price #税込価格×個数（わからない）
     price.to_i*amount.to_i
   end
   
