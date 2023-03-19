@@ -9,7 +9,7 @@ class OrderDetail < ApplicationRecord
     finish_making: 3
   }
   
-  def price
+  def price  #カラムの中の税込価格を計算（自信ない）
     (no_tax * 1.1).floor
   end
   
