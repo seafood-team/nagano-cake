@@ -24,8 +24,11 @@
   <!--郵便番号-->
   <%= current_customer.post_code %>
   <!--住所-->
-  <%= current_customer.city %>
-</div>
+  <%= current_customer.city %><br>
+  <!--名前-->
+  <%= current_customer.last_name %>
+  <%= current_customer.first_name %>
+</div><br>
 
 <!--登録済みの住所から選ぶ場合-->
 <div>
@@ -33,7 +36,7 @@
   <%= f.label :address_number_2, "登録済み住所から選択" %><br>
   <!--配送先住所一覧-->
   <%= f.collection_select(:registered, @shipping_address, :id, :shipping_address) %>
-</div>
+</div><br>
 
 <!--新しいお届け先を追加する場合-->
   <%= f.radio_button :address_number, 3 %>

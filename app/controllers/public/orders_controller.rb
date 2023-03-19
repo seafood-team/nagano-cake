@@ -39,7 +39,11 @@ class Public::OrdersController < ApplicationController
 
     if params[:order][:payment_number] == "1"# view で定義している payment_number が"1"だったときにこの処理を実行
 
+      @order.payment_method = 0
+
     elsif params[:order][:payment_number] == "2"
+
+      @order.payment_method = 1
 
     else
       redirect_to order_thanks_path
@@ -48,9 +52,9 @@ class Public::OrdersController < ApplicationController
     if params[:order][:address_number] == "1"# view で定義している address_number が"1"だったときにこの処理を実行
 
     # 登録済みの住所を保存
-      @order.customer_name = current_customer.shipping_name
-      @order.address = current_customer.customer_address
       @order.post_code = current_customer.post_code
+      @order.address = current_customer.city
+      @order.customer_name = (current_customer.last_name + current_customer.last_name)
 
     elsif params[:order][:address_number] == "2" # address_number が"2"だったときにこの処理を実行
 
@@ -73,7 +77,7 @@ class Public::OrdersController < ApplicationController
     else
       redirect_to order_thanks_path
     end
-    @cart_products = current_customer.cart_products.all # カートアイテムの情報をユーザーに確認してもらうために使用
+    @cart_products = current_customer.carts.all # カートアイテムの情報をユーザーに確認してもらうために使用
     @total = @cart_products.inject(0) { |sum, product| sum + product.subtotal }# 合計金額を出す処理です subtotal はモデルで定義したメソッド
 
   end
