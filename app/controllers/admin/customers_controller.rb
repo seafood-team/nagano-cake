@@ -6,11 +6,14 @@ class Admin::CustomersController < ApplicationController
   end
 
   def show
+<<<<<<< HEAD
     @customer = Customer.find(params[:id])
   end
   
   def edit
     @customer = Customer.find(params[:id])
+=======
+>>>>>>> origin/develop
   end
 
   def update

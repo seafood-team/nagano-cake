@@ -9,7 +9,6 @@
     <script src="https://kit.fontawesome.com/5667bc939f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
 
 
@@ -41,9 +40,9 @@
                 <%# end %>
               </li>
               <li class="nav-item">
-                <%#= link_to admin_genres_path do%>
+                <%= link_to admin_genres_path do%>
                  <i class="fas fa-tags">ジャンル一覧</i>
-                <%# end %>
+                <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to destroy_admin_session_path, method: :get do %>
@@ -122,15 +121,10 @@
       </nav>
     </header>
     <div class="container">
-  			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-        <% flash.each do |key, value| %>
-          <p class="alert alert-<%= key %>">
-            <%= sanitize value, tags: %w(br) %>
-          </p>
-        <% end %>
-      </div>
+  			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5"></div>
     </div>
     <main>
+      <%= flash[:success] %>
       <%= yield %>
     </main>
     <footer>
