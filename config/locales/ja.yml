@@ -2,10 +2,11 @@ ja:
   enums:
     order:
       order_status:
-        waiting: "支払待ち"
-        paid_up: "支払済み"
-        preparing: "発送準備中"
-        shipped: "発送済み"
+        payment_witing: "支払待ち"
+        payment_confirmation: "支払済み"
+        in_production: "製作中"
+        preparing_delivery: "発送準備中"
+        delivered: "発送済み"
         
 ja:
   enums:
