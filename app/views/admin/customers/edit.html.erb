@@ -36,13 +36,10 @@
       <tr>
         <th>会員ステータス</th>
         <td>
-          <% if @customer.updated_at == nil %>
-				    	<label><%= f.radio_button :updated_at,  {value: ""}, {checked: true} %>有効</label>
-				 		<label><%= f.radio_button :updated_at, value: Time.now %>退会</label>
-				 	<% else %>
-				 		<label><%= f.radio_button :updated_at,  value: "" %>有効</label>
-				 		<label><%= f.radio_button :updated_at, {value: Time.now}, {checked: true} %>退会</label>
-				 	<% end %>
+          <%= f.radio_button :is_deleted, true %>
+          <%= f.label :is_deleted, "退会済", {value: :true, style: "display: inline-block;"} %>
+          <%= f.radio_button :is_deleted, false %>
+          <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
         </td>
       </tr>
       <tr>

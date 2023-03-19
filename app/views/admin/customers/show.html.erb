@@ -35,10 +35,10 @@
      <tr>
       <th scope="row">会員ステータス</th>
       <td>
-        <% if @customer.updated_at == nil %>
-          有効
+        <% if @customer.is_deleted %>
+          退会済み
         <% else %>
-          退会
+          有効
         <% end %>
       </td>
     </tr>
@@ -47,5 +47,5 @@
   
   <%= link_to "編集する", edit_admin_customer_path(@customer.id) %>
   
-  <%#= link_to "注文履歴一覧を見る",  %>
+  <%= link_to "注文履歴一覧を見る", admin_path %>
 </div>
