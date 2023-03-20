@@ -35,27 +35,5 @@
       </div>
     </div>
   </div>
-=======
-  <span>
-    商品一覧
-  </span>
 
-
-<%= link_to '最新', products_path(latest: true) %>
-
-<%= link_to '価格が高い順', products_path(price_high_to_low: true) %>
-
-<%= link_to '価格が低い順', products_path(price_low_to_high: true) %>
-
-<% @product.each do |product| %>
-  <%= link_to products_path(product) do %>
-
-  <%= image_tag %>
-    <p><%= product.product_name %></p>
-    <span><%= number_to_currency(product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></span>
-
-  <% end %>
-<% end %>
-
->>>>>>> origin/develop
 </div>
