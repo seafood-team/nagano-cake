@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update, :index]
     resources :products, only: [:index, :new, :show, :create, :edit, :update]
     resources :genres, only: [:index, :edit, :create, :update]
-    get "/search" => "products#search"
+    get "admin/search" => "products#search"
   end
 
 

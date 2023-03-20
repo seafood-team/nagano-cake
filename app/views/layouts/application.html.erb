@@ -26,7 +26,7 @@
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
               <li class="nav-item">
-                <%= link_to admin_products_path do %>
+                <%= link_to admin_admin_search_path do %>
                   <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
@@ -52,7 +52,7 @@
                 <% end %>
               </li>
               <li class="mt-3">
-                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <%= form_with url: admin_admin_search_path, method: :get, local: true do |f| %>
                   <%= f.collection_select :word_for_search, Genre.all, :id, :genre_name %>
                   <%= f.submit "検索" %>
                 <% end %>
@@ -96,11 +96,7 @@
               </li>
                <% else %>
             <!--ログイン前時のヘッダー-->
-              <li class="">
-                <%#= link_to about_path do %>
-                  <i class=""></i>About
-                <%# end %>
-              </li>
+              
               <li class="nav-item">
                 <%= link_to products_path do %>
                   <i class="fas fa-birthday-cake"></i>商品一覧
