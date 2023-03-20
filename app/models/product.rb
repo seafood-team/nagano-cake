@@ -24,4 +24,5 @@ class Product < ApplicationRecord
   validates :no_tax
   validates :genre
   end
+ 
 end
