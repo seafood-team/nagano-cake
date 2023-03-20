@@ -1,65 +1,72 @@
-<!-- 注文情報確認画面 -->
-<h2>注文情報確認</h2>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <!-- 注文情報確認画面 -->
+    <h2>注文情報確認</h2>
 
-<table border class="table table-hover table-inverse border">
+    <div class='col-md-3'>
+      <table border class="table table-hover table-inverse border">
 
-  <% @cart_products.each do |cart| %>
+        <% @cart_products.each do |cart| %>
 
-    <thead>
-      <tr>
-        <th>郵便番号</th>
-        <th>住所</th>
-        <th>宛名</th>
-      </tr>
-    </thead>
+          <thead>
+            <tr>
+              <th>郵便番号</th>
+              <th>住所</th>
+              <th>宛名</th>
+            </tr>
+          </thead>
 
-    <tbody>
-      <tr>
-        <!-- 商品名 -->
-        <th><%= cart.product.name %></th>
+          <tbody>
+            <tr>
+              <!-- 商品名 -->
+              <th><%= cart.product.product_name %></th>
 
-        <!-- 金額 -->
-        <th><%= (cart.product.price).to_s(:delimited) %></th>
+              <!-- 金額 -->
+              <th><%= (cart.product.no_tax).to_s(:delimited) %></th>
 
-        <!-- 個数 -->
-        <th><%= cart.amount %></th>
+              <!-- 個数 -->
+              <th><%= cart.amount %></th>
 
-        <!-- 小計 -->
-        <th><%= (cart.product.price*cart.amount).to_s(:delimited) %></th>
-      </tr>
-    </tbody>
-  <% end %>
-</table>
+              <!-- 小計 -->
+              <th><%= (cart.product.no_tax*cart.amount).to_s(:delimited) %></th>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+    
+      <table border class="table table-hover table-inverse">
 
-<table border class="table table-hover table-inverse">
+        <tr>
+          <th>送料</th>
+          <td>住所</td>
+        </tr>
 
-  <tr>
-    <th>送料</th>
-    <td>住所</td>
-  </tr>
+        <tr>
+          <th>商品合計</th>
+          <td>住所</td>
+        </tr>
 
-  <tr>
-    <th>商品合計</th>
-    <td>住所</td>
-  </tr>
+        <tr>
+          <th>請求金額</th>
+          <td><%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 --></td>
+        </tr>
 
-  <tr>
-    <th>請求金額</th>
-    <td><%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 --></td>
-  </tr>
+      </table>
+    </div>
 
-</table>
+    <h3>支払方法</h3>
+    <dv><%= @order.payment_method %></dv>
 
-<h3>支払方法</h3>
-<dv><%= @order.payment_method %></dv>
+    <h3>お届け先</h3>
+    <div><%= @order.address %></div>
 
-<h3>お届け先</h3>
-<div><%= @order.address %></div>
-
-<!-- ユーザーには注文確定ボタンだけ表示 -->
-<%= form_with model: @order, url: 'order/create', local: true do |f| %>
-  <%= f.hidden_field :name %>
-  <%= f.hidden_field :address %>
-  <%= f.hidden_field :total_price, value: @total %>
-  <%= f.submit "注文を確定する" %>
-<% end %>
+    <!-- ユーザーには注文確定ボタンだけ表示 -->
+    <%= form_with model: @order, url: 'order/create', local: true do |f| %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :total_price, value: @total %>
+      <%= f.submit "注文を確定する" %>
+    <% end %>
+  </div>
+</div>
