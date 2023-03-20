@@ -36,18 +36,7 @@ class Public::OrdersController < ApplicationController
 
   def check
     @order = Order.new(order_params)
-
-    if params[:order][:payment_number] == "1"# view で定義している payment_number が"1"だったときにこの処理を実行
-
-      @order.payment_method = 0
-
-    elsif params[:order][:payment_number] == "2"
-
-      @order.payment_method = 1
-
-    else
-      redirect_to order_thanks_path
-    end
+      
     # new 画面から渡ってきたデータを @order に入れる
     if params[:order][:address_number] == "1"# view で定義している address_number が"1"だったときにこの処理を実行
 
