@@ -40,6 +40,12 @@ class Admin::ProductsController < ApplicationController
     end
   end
   
+  def search
+    @products = Product.page(params[:page]).per(10)
+    @word_for_search = Genre.find(params[:word_for_search])
+    @search_products = Product.where(genre: params[:word_for_search])
+  end
+  
   private
   def product_params
     params.require(:product).permit(:image, :product_name, :introduct, :no_tax, :sale_status, :genre_id)
