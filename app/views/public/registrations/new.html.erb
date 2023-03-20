@@ -58,9 +58,12 @@
       <div class="text-center">
         <%= f.submit "新規登録" ,class: "btn btn-success" %>
       </div>
-    <% end %>
+        <% end %>
       <div class="text-left">
-        既に登録済みの方は<%= render "public/shared/links" %>
+        既に登録済みの方は
+        <%= link_to  new_customer_session_path,class:"btn btn-primary" do %>
+        <i>ログインヘ</i>
+        <% end %>
       </div>
     </div>
   </div>
