@@ -23,6 +23,5 @@ class Product < ApplicationRecord
   validates :introduct
   validates :no_tax
   validates :genre
-  validates :sale_status
   end
 end
