@@ -24,13 +24,14 @@ class Public::CartsController < ApplicationController
   end
   
   def create
+    @cart = current_customer.carts.new(cart_params)
     if current_customer.carts.find_by(product_id: params[:cart][:product_id]).present?
       cart = current_customer.carts.find_by(product_id: params[:cart][:product_id])
       cart.amount += (params[:cart][:amount]).to_i
       cart.save
       redirect_to carts_path
     else
-      current_customer.carts.build(product_id:).save
+      @cart.save
       redirect_to carts_path
     end
       
