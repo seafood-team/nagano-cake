@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update, :index]
     resources :products, only: [:index, :new, :show, :create, :edit, :update]
     resources :genres, only: [:index, :edit, :create, :update]
+    get "/search" => "products#search"
   end
 
 
@@ -30,7 +31,8 @@ Rails.application.routes.draw do
     post 'order/check' => 'orders#check'
     get 'order/thanks' => 'orders#thanks'
     delete "/carts/destroy_all" => "carts#destroy_all"
-    resources :carts, only: [:index, :update, :destroy, :create]
+    resources :carts, only: [:index, :update, :destroy, :create] 
+    get "/search" => "products#search"
   end
 
 end

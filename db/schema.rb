@@ -112,11 +112,7 @@ ActiveRecord::Schema.define(version: 2023_03_20_055400) do
     t.string "genre_id", null: false
     t.string "product_name", null: false
     t.text "introduct", null: false
-<<<<<<< HEAD
     t.integer "no_tax", null: false
-=======
-    t.string "no_tax", null: false
->>>>>>> 99c9b60 ([Update]admmin/product)
     t.boolean "sale_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
