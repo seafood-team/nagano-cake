@@ -12,10 +12,12 @@
 
 <% @product.each do |product| %>
   <%= link_to products_path(product) do %>
+
   <%= image_tag %>
     <p><%= product.product_name %></p>
     <span><%= number_to_currency(product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></span>
 
   <% end %>
 <% end %>
+
 </div>

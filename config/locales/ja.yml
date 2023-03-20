@@ -1,0 +1,30 @@
+ja:
+  enums:
+    order:
+      order_status:
+        payment_witing: "支払待ち"
+        payment_confirmation: "支払済み"
+        in_production: "製作中"
+        preparing_delivery: "発送準備中"
+        delivered: "発送済み"
+        
+ja:
+  enums:
+    order:
+      payment_method:
+        credit_card: "クレジットカード"
+        bank_transfer: "銀行振込"
+        
+ja:
+  enums:
+    order_detail:
+      making_status:
+        cannot_make: "製作不可"
+        waitinf_for_making: "製作待ち"
+        making: "製作中"
+        finish_making: "製作完了"
+        
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
