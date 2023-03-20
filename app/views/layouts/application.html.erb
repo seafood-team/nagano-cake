@@ -5,7 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/5667bc939f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -26,27 +27,29 @@
             <% if admin_signed_in? %>
               <li class="nav-item">
                 <%= link_to admin_products_path do %>
-                  <i class="fas fa-birthday-cake">商品一覧</i>
+                  <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to admin_customers_path do %>
-                  <i class="fas fa-users">会員一覧</i>
+                  <i class="fas fa-users"></i>会員一覧
                 <% end %>
               </li>
               <li class="nav-item">
                 <%#= link_to admin_path  do %>
-                  <i class="fas fa-list">注文履歴一覧</i>
+                  <i class="fas fa-list"></i>注文履歴一覧
                 <%# end %>
               </li>
               <li class="nav-item">
-                <%= link_to admin_genres_path do%>
-                 <i class="fas fa-tags">ジャンル一覧</i>
-                <% end %>
+
+                <%#= link_to admin_genres_path do%>
+                 <i class="fas fa-tags"></i>ジャンル一覧
+                <%# end %>
+                
               </li>
               <li class="nav-item">
                 <%= link_to destroy_admin_session_path, method: :get do %>
-                  <i class="fas fa-sign-out-alt">ログアウト</i>
+                  <i class="fas fa-sign-out-alt"></i>ログアウト
                 <% end %>
               </li>
 
@@ -61,51 +64,51 @@
               </li>
               <li class="nav-item">
                 <%= link_to customers_path do %>
-                  <i class="fas fa-user">マイページ</i>
+                  <i class="fas fa-user"></i>マイページ
                 <% end %>
               </li>
 
-              <li class="nav-item">             
+              <li class="nav-item">
 
                 <%= link_to  products_path do %>
-                  <i class="fas fa-birthday-cake">商品一覧</i>
+                  <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to carts_path do %>
-                  <i class="fas fa-cart-arrow-down">カート</i>
+                  <i class="fas fa-cart-arrow-down"></i>カート
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to destroy_customer_session_path, method: :get do %>
-                  <i class="fas fa-sign-out-alt">ログアウト</i>
+                  <i class="fas fa-sign-out-alt"></i>ログアウト
                 <% end %>
               </li>
                <% else %>
             <!--ログイン前時のヘッダー-->
               <li class="">
                 <%#= link_to about_path do %>
-                  <i class="">About</i>
+                  <i class=""></i>About
                 <%# end %>
               </li>
               <li class="nav-item">
                 <%= link_to products_path do %>
-                  <i class="fas fa-birthday-cake">商品一覧</i>
+                  <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to new_customer_registration_path, data: {"turbolinks" => false} do %>
-                  <i class="fas fa-user-plus">新規登録</i>
+                  <i class="fas fa-user-plus"></i>新規登録
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to  new_customer_session_path do%>
-                  <i class="fas fa-sign-in-alt"></i>ログイン</i>
+                  <i class="fas fa-sign-in-alt"></i>ログイン
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to  new_admin_session_path do%>
-                  <i class="fas fa-sign-in-alt"></i>管理者用</i>
+                  <i class="fas fa-sign-in-alt"></i>管理者用
                 <% end %>
               </li>
               <li class="mt-3">
