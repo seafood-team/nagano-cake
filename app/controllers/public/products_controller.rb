@@ -7,6 +7,11 @@ class Public::ProductsController < ApplicationController
   
   def index
     @products = Product.latest
+    if params[:no_tax_low_to_high]
+      @products = Product.no_tax_low_to_high
+    elsif params[:no_tax_high_to_low]
+      @products = Product.no_tax_high_to_low
+    end
   end
   
   private
