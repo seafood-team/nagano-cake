@@ -35,7 +35,8 @@
   <%= f.radio_button :address_number, 2 %>
   <%= f.label :address_number_2, "登録済み住所から選択" %><br>
   <!--配送先住所一覧-->
-  <%= f.collection_select(:registered, @shipping_address, :id, :shipping_address) %>
+
+  <%= f.select :registered, options_from_collection_for_select(ShippingAddress.all, :id, :address_display) %>
 </div><br>
 
 <!--新しいお届け先を追加する場合-->
