@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td>配送先</td>
-      <td><%= @order.customer.post_code + @order.customer.adress %></td>
+      <td><%= @order.customer.post_code + @order.customer.adrdess %></td>
       <td><%= @order.customer_name %></td>
     </tr>
     <tr>
@@ -56,15 +56,15 @@
   </table>
   <table class="ordertotals">
     <tr>
-      <td>商品合計</td>
+      <th>商品合計</th>
       <td></td>
     </tr>
     <tr>
-      <td>送料</td>
+      <th>送料</th>
       <td>８００円</td>
     </tr>
     <tr>
-      <td>請求金額合計</td>
+      <th>請求金額合計</th>
       <td></td>
     </tr>
   </table>
