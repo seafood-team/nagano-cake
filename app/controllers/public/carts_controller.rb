@@ -13,7 +13,7 @@ class Public::CartsController < ApplicationController
   end
   
   def destroy
-    cart = Cart.find(params[:product_id])
+    cart = Cart.find(params[:id])
     cart.destroy
     redirect_to request.referer
   end
