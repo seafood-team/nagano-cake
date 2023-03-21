@@ -23,8 +23,8 @@
                 <td class="align-middle"><%= product.id %></td>
                 <td class="align-middle"><%= link_to admin_product_path(product.id) do %>
                   <u><%= product.product_name %></u>
-                </td>
                 <% end %>
+                </td>
                 <td class="align-middle"><%= product.no_tax %></td>
                 <td class="align-middle"><%= product.genre.genre_name %></td>
                 <td class="align-middle">
