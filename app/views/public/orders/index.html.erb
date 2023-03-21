@@ -6,8 +6,8 @@
         <thead>
           <tr>
             <th class='col-md-1'>注文日</th>
-            <th class='col-md-4'>配送先</th>
-            <th class='col-md-2'>注文商品</th>
+            <th class='col-md-3'>配送先</th>
+            <th class='col-md-1'>注文商品</th>
             <th class='col-md-1'>支払い金額</th>
             <th class='col-md-1'>ステータス</th>
             <th class='col-md-1'>注文詳細</th>
@@ -19,24 +19,22 @@
           <tr>
             <!-- 注文日 -->
             <th>
-              <%#= order.updated_at %>
+              <%= order_detail.created_at.strftime('%Y/%m/%d') %>
               <%#= image_tag cart.product.image, size:'50x50' %>
 
             </th>
 
             <!-- 配送先 -->
             <th>
-              〒
-              <%= order_detail.order.post_code %>
-              <%= order_detail.order.address %>
-              <%= order_detail.order.customer_name %>
-              <%#= (cart.product.with_tax_price).to_s(:delimited) %>
+              <div>〒<%= order_detail.order.post_code %></div>
+              <div><%= order_detail.order.address %></div>
+              <div><%= order_detail.order.customer_name %></div>
             </th>
 
             <!-- 注文商品 -->
             <th>
               <%= order_detail.product.product_name %>
-              <%#= cart.amount %>
+
             </th>
 
             <!-- 配送金額 -->
