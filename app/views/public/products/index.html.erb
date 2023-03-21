@@ -1,35 +1,38 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
       ジャンル検索
     </div>
-    
-    <div class="col-6">
-      <h1 class="product-title">
-        <% if params[:genre_id] %>
-          <%= @genre.name %>
-        <% else %>
-          すべての商品
-        <% end %>
-      </h1>
+
+    <div class="col-10">
       <span>
+        <h3 class="product-title">
+          <strong>
+            <% if params[:genre_id] %>
+              <%= @genre.name %>
+            <% else %>
+              商品一覧
+            <% end %>
+          </strong>
+        </h3>
        全<%= @products.count %>件
       </span>
-    
+
       <div>
-        <%= link_to '最新', products_path(latest: true) %>
-        
-        <%= link_to '価格が高い順', products_path(price_high_to_low: true) %>
-        
-        <%= link_to '価格が低い順', products_path(price_low_to_high: true) %>
+        <%= link_to '最新', products_path(all: true) %>
+        <%= link_to '価格が高い順', products_path(no_tax_high_to_low: "true") %>
+        <%= link_to '価格が低い順', products_path(no_tax_low_to_high: "true") %>
       </div>
-      <div>
+
+      <div class="row mt-3">
         <% @products.each do |product| %>
-          <%= link_to product_path(product.id) do %>
-          <%= image_tag product.get_image, size: "150x150" %>
-            <p><%= product.product_name %></p>
-            <span><%= number_to_currency(product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></span>
-          <% end %>
+          <div class="col">
+            <%= link_to product_path(product.id) do %>
+            <%= image_tag product.get_image, size: "200x150" %><br>
+            <%= product.product_name %><br>
+            <% end %>
+            ¥<%= product.no_tax %>(税抜)
+          </div>
         <% end %>
       </div>
     </div>

@@ -13,7 +13,6 @@ class Order < ApplicationRecord
     in_production: 2,
     preparing_delivery: 3,
     delivered: 4
-    }
-    
- 
+  }
+
 end
