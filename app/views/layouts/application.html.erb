@@ -47,6 +47,7 @@
 
               </li>
               <li class="nav-item">
+<<<<<<< HEAD
                 <%= link_to destroy_admin_session_path, method: :get, class: 'btn btn-info' do %>
                   <i class="fas fa-sign-out-alt"></i>ログアウト
                 <% end %>
@@ -55,6 +56,10 @@
                 <%= form_with url: admin_admin_search_path, method: :get, local: true do |f| %>
                   <%= f.collection_select :word_for_search, Genre.all, :id, :genre_name %>
                   <%= f.submit "検索",class: "btn btn-info btn-sm" %>
+=======
+                <%= link_to destroy_admin_session_path, method: :get do %>
+                  <i class="">ログアウト</i>
+>>>>>>> origin
                 <% end %>
               </li>
 
