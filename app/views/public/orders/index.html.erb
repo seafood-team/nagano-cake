@@ -1,0 +1,54 @@
+<div class='container'>
+  <h2>注文情報確認</h2>
+    <div class='row'>
+
+      <table class="table table-hover table-inverse table-bordered">
+        <thead>
+          <tr>
+            <th class='col-md-1'>注文日</th>
+            <th class='col-md-3'>配送先</th>
+            <th class='col-md-1'>注文商品</th>
+            <th class='col-md-1'>支払い金額</th>
+            <th class='col-md-1'>ステータス</th>
+            <th class='col-md-1'>注文詳細</th>
+          </tr>
+        </thead>
+
+        <% @order_details.each do |order_detail| %>
+        <tbody>
+          <tr>
+            <!-- 注文日 -->
+            <th>
+              <%= order_detail.created_at.strftime('%Y/%m/%d') %>
+              <%#= image_tag cart.product.image, size:'50x50' %>
+
+            </th>
+
+            <!-- 配送先 -->
+            <th>
+              <div>〒<%= order_detail.order.post_code %></div>
+              <div><%= order_detail.order.address %></div>
+              <div><%= order_detail.order.customer_name %></div>
+            </th>
+
+            <!-- 注文商品 -->
+            <th>
+              <%= order_detail.product.product_name %>
+
+            </th>
+
+            <!-- 配送金額 -->
+            <th><%= order_detail.order.shipping_cost %></th>
+
+            <!--配送ステータス-->
+            <th><%= order_detail.making_status %></th>
+
+            <!--注文詳細-->
+            <th><%= link_to "表示する", order_path(order_detail.id), class:"btn btn-primary mb-2" %></th>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
