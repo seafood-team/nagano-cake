@@ -8,8 +8,6 @@
      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/5667bc939f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   </head>
 
 
@@ -94,9 +92,14 @@
                   <%= f.submit "検索" %>
                 <% end %>
               </li>
-               <% else %>
+               
             <!--ログイン前時のヘッダー-->
-
+              <% else %>
+              <li class="nav-item">
+                <%= link_to about_path do %>
+                  <i class="fas fa-store-alt"></i>About
+                <% end %>
+              </li>
               <li class="nav-item">
                 <%= link_to products_path, class: 'btn btn-light mr-2' do %>
                   <i class="fas fa-birthday-cake"></i>商品一覧
