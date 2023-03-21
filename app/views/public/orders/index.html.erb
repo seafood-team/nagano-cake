@@ -1,0 +1,44 @@
+<div class='container'>
+  <h2>注文情報確認</h2>
+    <div class='row'>
+
+      <table class="table table-hover table-inverse table-bordered">
+        <thead>
+          <tr>
+            <th class='col-md-1'>注文日</th>
+            <th class='col-md-4'>配送先</th>
+            <th class='col-md-2'>注文商品</th>
+            <th class='col-md-1'>配送金額</th>
+            <th class='col-md-1'>ステータス</th>
+            <th class='col-md-1'>注文詳細</th>
+          </tr>
+        </thead>
+
+        <% @orders.each do |order| %>
+        <tbody>
+          <tr>
+            <!-- 注文日 -->
+            <th>
+              <%#= order.updated_at %>
+              <%#= image_tag cart.product.image, size:'50x50' %>
+
+            </th>
+
+            <!-- 配送先 -->
+            <th>
+              <%= order.address %>
+              <%#= (cart.product.with_tax_price).to_s(:delimited) %>
+            </th>
+
+            <!-- 注文商品 -->
+            <th><%#= cart.amount %></th>
+
+            <!-- 配送金額 -->
+            <th><%#= (cart.product.with_tax_price*cart.amount).to_s(:delimited) %></th>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

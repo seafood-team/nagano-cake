@@ -5,6 +5,10 @@ class Public::OrdersController < ApplicationController
 
   end
 
+  def index
+    @orders = Order.all
+  end
+
   def create # Order に情報を保存
 
     # ログインユーザーのカートアイテムをすべて取り出して carts に入れる
