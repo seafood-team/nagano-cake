@@ -27,7 +27,7 @@ class Public::OrdersController < ApplicationController
         # 購入が完了したらカート情報は削除するのでこちらに保存
         order_details.amount = cart.amount
         order_details.price = cart.product.with_tax_price
-        order_details.making_status = @order.payment_method
+        order_details.making_status = 0
 
         order_details.save
       end
