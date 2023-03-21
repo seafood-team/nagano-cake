@@ -17,21 +17,24 @@
       </span>
     
       <div>
-        <%= link_to '最新', products_path(latest: true) %>
-        
-        <%= link_to '価格が高い順', products_path(price_high_to_low: true) %>
-        
-        <%= link_to '価格が低い順', products_path(price_low_to_high: true) %>
+        <%= link_to '最新', products_path(all: true) %>
+        <%= link_to '価格が高い順', products_path(no_tax_high_to_low: "true") %>
+        <%= link_to '価格が低い順', products_path(no_tax_low_to_high: "true") %>
       </div>
-      <div>
+      
+      <table>
         <% @products.each do |product| %>
-          <%= link_to product_path(product.id) do %>
-          <%= image_tag product.get_image, size: "150x150" %>
-            <p><%= product.product_name %></p>
-            <span><%= number_to_currency(product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></span>
-          <% end %>
+        <tr class="d-flex-row flex-nowrap">
+          <td>
+            <%= link_to product_path(product.id) do %>
+              <%= image_tag product.get_image, size: "150x150" %><br>
+              <%= product.product_name %><br>
+              ¥<%= product.no_tax %>(税抜)
+            <% end %>
+          </td>
+        </tr>  
         <% end %>
-      </div>
+      </table>
     </div>
   </div>
 

@@ -5,8 +5,8 @@ class Product < ApplicationRecord
   belongs_to :genre
   
   has_one_attached :image
-  scope :price_high_to_low, -> { order(price: :desc) }
-  scope :price_low_to_high, -> { order(price: :asc) }
+  scope :no_tax_high_to_low, -> { order(no_tax: :desc) }
+  scope :no_tax_low_to_high, -> { order(no_tax: :asc) }
 
   def with_tax_price
     (no_tax * 1.1).floor
