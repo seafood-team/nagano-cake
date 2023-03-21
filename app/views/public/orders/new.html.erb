@@ -32,7 +32,6 @@
       <%= current_customer.last_name %>
       <%= current_customer.first_name %>
     </div><br>
-
     <!--登録済みの住所から選ぶ場合-->
     <div>
       <%= f.radio_button :address_number, 2 %>
@@ -43,6 +42,7 @@
     </div><br>
 
     <!--新しいお届け先を追加する場合-->
+    <div>
       <%= f.radio_button :address_number, 3 %>
       <%= f.label :address_number_3, "新しいお届け先" %><br>
 
@@ -52,8 +52,9 @@
       <%= f.text_field :address %><br>
       <%= f.label :customer_name, "宛名" %>
       <%= f.text_field :customer_name %><br>
+    </div>
 
-    <!-- 選んでもらったデータを送ります -->
+    <!-- 選んでもらったデータを送る -->
       <%= f.submit "確認画面へ進む" %>
     <% end %>
   </div>
