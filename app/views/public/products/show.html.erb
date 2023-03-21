@@ -4,7 +4,7 @@
   <%= @product.product_name %>
   <p><%= number_to_currency(@product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></p>
   <p><%= @product.introduct %></p>
-  
+  <% if customer_signed_in? %>
   <p>数量を選択して下さい</p>
   <%= form_with model: @cart, url: carts_path,method: :post  do |f| %>
     <%= f.hidden_field :product_id,:value => @product.id %>
@@ -12,6 +12,20 @@
     <%= f.label :amount, "個数選択" %>
     <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],required:true %>
     <%= f.submit 'カートに入れる' %>
-  <% end %>    
-  
+  <% end %>
+  <% else %>
+<div class="container">
+    <i>ご購入されるお客様へ</i><br><br>
+    <i>アカウントをお持ちでない方は</i>
+    <%= link_to new_customer_registration_path, data: {"turbolinks" => false} do %>
+    <i class="fas fa-user-plus"></i>新規登録
+    <% end %>をお願いします<br>
+    <br>
+    <i>既にアカウントをお持ちの方は</i>
+    <%= link_to  new_customer_session_path do%>
+      <i class="fas fa-sign-in-alt"></i>ログイン
+    <% end %>へ
+  </li>
 </div>
+  <% end %>
+</div>  
