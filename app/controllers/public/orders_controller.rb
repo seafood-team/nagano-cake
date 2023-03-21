@@ -6,6 +6,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @order_details = OrderDetail.all
     @orders = Order.all
   end
 

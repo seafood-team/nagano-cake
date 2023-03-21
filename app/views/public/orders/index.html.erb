@@ -8,13 +8,13 @@
             <th class='col-md-1'>注文日</th>
             <th class='col-md-4'>配送先</th>
             <th class='col-md-2'>注文商品</th>
-            <th class='col-md-1'>配送金額</th>
+            <th class='col-md-1'>支払い金額</th>
             <th class='col-md-1'>ステータス</th>
             <th class='col-md-1'>注文詳細</th>
           </tr>
         </thead>
 
-        <% @orders.each do |order| %>
+        <% @order_details.each do |order_detail| %>
         <tbody>
           <tr>
             <!-- 注文日 -->
@@ -26,15 +26,27 @@
 
             <!-- 配送先 -->
             <th>
-              <%= order.address %>
+              〒
+              <%= order_detail.order.post_code %>
+              <%= order_detail.order.address %>
+              <%= order_detail.order.customer_name %>
               <%#= (cart.product.with_tax_price).to_s(:delimited) %>
             </th>
 
             <!-- 注文商品 -->
-            <th><%#= cart.amount %></th>
+            <th>
+              <%= order_detail.product.product_name %>
+              <%#= cart.amount %>
+            </th>
 
             <!-- 配送金額 -->
-            <th><%#= (cart.product.with_tax_price*cart.amount).to_s(:delimited) %></th>
+            <th><%= order_detail.order.shipping_cost %></th>
+
+            <!--配送ステータス-->
+            <th><%= order_detail.making_status %></th>
+
+            <!--注文詳細-->
+            <th><%= link_to "表示する", order_path(order_detail.id), class:"btn btn-primary mb-2" %></th>
           </tr>
         </tbody>
         <% end %>
