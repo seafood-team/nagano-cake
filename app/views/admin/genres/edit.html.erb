@@ -11,7 +11,8 @@
         <%= f.label :genre_name, "ジャンル名" %>
         <%= f.text_field :genre_name, value: @genre.genre_name %>
         <%=f.submit "変更を保存", class:"btn btn-success" %>
-      <% end %>
+        <%= link_to '削除する', admin_genre_path(@genre.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger"  %>      
+        <% end %>
     </div>
   </div>
   
