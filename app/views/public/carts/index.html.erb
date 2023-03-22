@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html>
   <div class="container">
-<<<<<<< HEAD
-    <div class="col">
-      <h3 class="">ショッピングカート</h3>
-      <div class="text-right mb-2">
-      <%= link_to "カートを空にする", carts_destroy_all_path, method: :delete, class: "btn btn-danger" %>
-    </div>
-      <table class ="table cart-table table-hover table-inverse table-bordered">
-=======
     <div class="row">
       <div class="col-10">
         <h1>ショッピングカート</h1>
@@ -20,7 +12,6 @@
     <div class ="row">
       <div class ="col">
        <table class ="table table-bordered">
->>>>>>> develop
         <thead>
           <tr>
             <th class="table-active">商品名</th>
@@ -60,17 +51,6 @@
      <div class ="col-4">
       <table class ="table table-bordered">
          <tr>
-<<<<<<< HEAD
-           <td colspan="3"></td>
-           <th class="text-right">合計金額</th>
-           <td class="text-right"><%= @total %></td>
-         </tr>
-      </table>
-      
-      <%= link_to "買い物を続ける",products_path, class: "btn btn-primary" %>
-      <div class="text-center">
-        <%= link_to "情報入力に進む",new_order_path, class: "btn btn-success  btn-lg" %>
-=======
            <th class="table-active">合計金額</th>
            <td><%= @total %></td>
          </tr>
@@ -80,7 +60,6 @@
     <div class ="row">
       <div class ="col offset-md-5">
         <%= link_to "情報入力に進む",new_order_path, class:"btn btn-success" %>
->>>>>>> develop
       </div>
     </div>
   </div>
