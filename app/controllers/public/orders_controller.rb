@@ -47,15 +47,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     # 送料を確認する用
-    @order = Order.new
-
-
-    if params[:order][:payment_option] == "0"
-      @order.payment_method = 0
-    elsif params[:order][:payment_option] == "1"
-      @order.payment_method = 1
-    else
-    end
+    # @order = Order.new
 
     # new 画面から渡ってきたデータを @order に入れる
     if params[:order][:address_number] == "1"# view で定義している address_number が"1"だったときにこの処理を実行
@@ -63,7 +55,7 @@ class Public::OrdersController < ApplicationController
     # 登録済みの住所を保存
       @order.post_code = current_customer.post_code
       @order.address = current_customer.city
-      @order.customer_name = (current_customer.first_name + current_customer.last_name)
+      @order.customer_name = (current_customer.last_name + current_customer.first_name)
 
     elsif params[:order][:address_number] == "2" # address_number が"2"だったときにこの処理を実行
 
@@ -80,16 +72,7 @@ class Public::OrdersController < ApplicationController
 
       new_address = Order.new(order_address_params)
       new_address.customer_id = current_customer.id
-      shipping_address = ShippingAddress.new(shipping_address_params)
-      shipping_address.customer_id = current_customer.id
 
-      if new_address.save
-        shipping_address.shipping_post_code = new_address.post_code
-        shipping_address.shipping_address = new_address.address
-        shipping_address.shipping_name = new_address.customer_name
-      else
-        render :new
-      end
     else
       redirect_to order_check_path
     end
@@ -102,7 +85,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :post_code, :address, :customer_name, :shipping_cost)
+    params.require(:order).permit(:payment_method, :post_code, :customer_name, :address, :shipping_cost)
   end
 
   def order_address_params
