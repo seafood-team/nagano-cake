@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <h1>注文履歴一覧</h1>
-
-  <table class ="table">
-    <thead>
-      <tr>
-        <th>購入日時</th>
-        <th>購入者</th>
-        <th>注文個数</th>
-        <th>注文ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-      <tr>
-        <td><%= l order.created_at %></td>
-        <td><%= order.first_name + order.last_name %></td>
-        <!-- 合計にするにはどうしたらいいのか -->
-        <% @total_amount += order.order_detail.amount %>
-        <td><%= @total_amount %></td>
-        <td><%= order.order_status %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>注文履歴一覧</h1>
+      </div>
+     </div>
+     <div class ="row">
+      <div class ="col">
+       <table class ="table">
+         <thead>
+           <tr>
+             <th class="table-active">購入日時</th>
+             <th class="table-active">購入者</th>
+             <th class="table-active">注文個数</th>
+             <th class="table-active">注文ステータス</th>
+           </tr>
+         </thead>
+         <tbody>
+           <% @orders.each do |order| %>
+           <tr>
+             <td><%= l order.created_at %></td>
+             <td><%= order.first_name + order.last_name %></td>
+             <!-- 合計にするにはどうしたらいいのか -->
+             <% @total_amount += order.order_detail.amount %>
+             <td><%= @total_amount %></td>
+             <td><%= order.order_status %></td>
+             <!--  -->
+           </tr>
+           <% end %>
+           <%= paginate orders %>
+         </tbody>
+       </table>
+      </div>
+    </div>
+  </div>
 </html>
