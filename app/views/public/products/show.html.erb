@@ -1,31 +1,44 @@
 <div class="container">
-  <%= image_tag @product.get_image %><br>
+    <div class="row">
+      <div class="col-2">
+       <%= render 'genre_sidebar', genres: @genres %>
+      </div>
 
-  <%= @product.product_name %>
-  <p><%= number_to_currency(@product.no_tax, unit: "¥", strip_insignificant_zeros: true) %></p>
-  <p><%= @product.introduct %></p>
-  <% if customer_signed_in? %>
-  <p>数量を選択して下さい</p>
-  <%= form_with model: @cart, url: carts_path,method: :post  do |f| %>
-    <%= f.hidden_field :product_id,:value => @product.id %>
-    <%= f.hidden_field :customer_id,:value => current_customer.id %>
-    <%= f.label :amount, "個数選択" %>
-    <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],required:true %>
-    <%= f.submit 'カートに入れる' %>
-  <% end %>
-  <% else %>
-<div class="container">
-    <i>ご購入されるお客様へ</i><br><br>
-    <i>アカウントをお持ちでない方は</i>
-    <%= link_to new_customer_registration_path, data: {"turbolinks" => false} do %>
-    <i class="fas fa-user-plus"></i>新規登録
-    <% end %>をお願いします<br>
-    <br>
-    <i>既にアカウントをお持ちの方は</i>
-    <%= link_to  new_customer_session_path do%>
-      <i class="fas fa-sign-in-alt"></i>ログイン
-    <% end %>へ
-  </li>
+      <div class="col-10 mt-3">
+        <div class="row">
+          <div class="col-md-5">
+            <%= image_tag @product.get_image, size: '300x200' %><br>
+          </div>
+
+          <div class="col-4">
+            <h3><strong><%= @product.product_name %></strong></h3></br>
+              <p><strong><%= @product.introduct %></strong></p><br>
+              <h3>¥<%= (@product.no_tax * 1.1).floor.to_s(:delimited) %><span>（税込）</span></h3>
+                <% if customer_signed_in? %>
+                  <%= form_with model: @cart, url: carts_path,method: :post  do |f| %>
+                    <%= f.hidden_field :product_id,:value => @product.id %>
+                    <%= f.hidden_field :customer_id,:value => current_customer.id %>
+                    <%= f.label :amount, "個数選択" %>
+                    <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],required:true %>
+                    <%= f.submit 'カートに入れる', class: "btn btn-success" %>
+                  <% end %>
+                <% else %>
+              <div class="container">
+                <i>ご購入されるお客様へ</i><br><br>
+                <i>アカウントをお持ちでない方は</i>
+                <%= link_to new_customer_registration_path, data: {"turbolinks" => false} do %>
+                  <i class="fas fa-user-plus"></i>新規登録
+                <% end %>をお願いします<br>
+                <br>
+                <i>既にアカウントをお持ちの方は</i>
+                <%= link_to  new_customer_session_path do%>
+                  <i class="fas fa-sign-in-alt"></i>ログイン
+                <% end %>へ
+              </li>
+              </div>
+              <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
-  <% end %>
-</div>  
