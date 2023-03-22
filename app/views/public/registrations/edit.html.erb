@@ -1,44 +1,51 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>会員情報編集</h2>
+    </div>
+  </div>
   <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <!--名前＋（フリガナ）の編集-->
+    <div class="row">
+      <div class="col-2 offset-md-1"><%= f.label "お名前" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(姓)" %></div>
+      <div class="col-2"><%= f.text_field :last_name, :size => "10" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(名)" %></div>
+      <div class="col-3"><%= f.text_field :first_name, :size => "10" %></div>
+    </div>
+    <div class="row">
+      <div class="col-2 offset-md-1"><%= f.label "フリガナ" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(セイ)" %></div>
+      <div class="col-2"><%= f.text_field :last_name_kana, :size => "10" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(メイ)" %></div>
+      <div class="col-3"><%= f.text_field :first_name_kana, :size => "10" %></div>
+    </div>
+<!--メールアドレス変更-->
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "メールアドレス" %></div>
+      <div class="col-3"><%= f.email_field :email, :size => "20" %></div>
+    </div>
+<!--郵便番号変更-->    
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "郵便番号(ハイフンなし)" %></div>
+      <div class="col-3"><%= f.text_field :post_code, :size => "10" %></div>
+    </div>
+<!--住所変更-->
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "住所" %></div>
+      <div class="col-3"><%= f.text_field :city, :size => "45"%></div>
+    </div>
+<!--電話番号変更-->
+　　<div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "電話番号(ハイフンなし)" %></div>
+      <div class="col-3"><%= f.text_field :telephone %></div>
+      <%= f.submit "編集内容を保存", class:"btn btn-success my-4" %>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1">
+    <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger" %>
+    <%= link_to "Back", :back, class:"btn btn-secondary" %>
+    </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-<%= link_to "退会する", customers_unsubscribe_path %>
-
-<%= link_to "Back", :back %>
+</div>
