@@ -22,12 +22,6 @@ class Public::ProductsController < ApplicationController
     
   end
   
-  def search
-    @products = Product.page(params[:page]).per(5)
-    @word_for_search = Genre.find(params[:word_for_search])
-    @search_products = Product.where(genre: params[:word_for_search])
-  end
-  
   private
   
   def product_params
