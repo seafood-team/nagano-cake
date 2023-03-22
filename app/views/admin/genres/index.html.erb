@@ -10,7 +10,7 @@
             <%= form_with model: @genre, url: admin_genres_path, method: :post, local: true do |f| %>
             <%= f.label :genres_name, "ジャンル名" %>
             <%= f.text_field :genre_name %>
-            <%= f.submit "新規登録" %>
+            <%= f.submit "新規登録", class:"btn btn-primary" %>
             <% end %>
             </div>
             </div>
