@@ -6,6 +6,7 @@ class Public::ProductsController < ApplicationController
   end
   
   def index
+    @genres = Genre.all
     @products = Product.latest
     if params[:no_tax_low_to_high]
       @products = Product.no_tax_low_to_high
