@@ -26,11 +26,8 @@
                <% end %>
              </td>
              <td><%= order.customer_name %></td>
-             <!-- 合計にするにはどうしたらいいのか -->
-             <%# @total_amount += order.order_detail.amount %>
-             <td><%#= @total_amount %></td>
+             <td><%= order.order_details.sum(:amount) %></td>
              <td><%= order.order_status_i18n %></td>
-           
            </tr>
            <% end %>
            
