@@ -19,4 +19,9 @@ class Order < ApplicationRecord
     800
   end
 
+  # 送料
+  def shipping_fee
+    800
+  end
+
 end

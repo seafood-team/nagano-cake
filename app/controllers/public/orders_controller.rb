@@ -2,7 +2,6 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-
   end
 
   def index
@@ -10,8 +9,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order_detail = OrderDetail.find(params[:id])
-    @products = Product.all
+    @order = Order.find(params[:id])
   end
 
   def create # Order に情報を保存
@@ -48,13 +46,24 @@ class Public::OrdersController < ApplicationController
   def check
     @order = Order.new(order_params)
 
+    # 送料を確認する用
+    @order = Order.new
+
+
+    if params[:order][:payment_option] == "0"
+      @order.payment_method = 0
+    elsif params[:order][:payment_option] == "1"
+      @order.payment_method = 1
+    else
+    end
+
     # new 画面から渡ってきたデータを @order に入れる
     if params[:order][:address_number] == "1"# view で定義している address_number が"1"だったときにこの処理を実行
 
     # 登録済みの住所を保存
       @order.post_code = current_customer.post_code
       @order.address = current_customer.city
-      @order.customer_name = (current_customer.last_name + current_customer.first_name)
+      @order.customer_name = (current_customer.first_name + current_customer.last_name)
 
     elsif params[:order][:address_number] == "2" # address_number が"2"だったときにこの処理を実行
 
@@ -86,13 +95,14 @@ class Public::OrdersController < ApplicationController
     end
     @cart_products = current_customer.carts.all # カートアイテムの情報をユーザーに確認してもらうために使用
     @total = @cart_products.inject(0) { |sum, product| sum + product.subtotal }# 合計金額を出す処理です subtotal はモデルで定義したメソッド
+    @billing_amount = @total + @order.shipping_fee
 
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:post_code, :address, :customer_name, :shipping_cost)
+    params.require(:order).permit(:payment_method, :post_code, :address, :customer_name, :shipping_cost)
   end
 
   def order_address_params
