@@ -3,17 +3,23 @@ class Public::ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @cart = Cart.new
+    @genres = Genre.all
   end
   
   def index
     @genres = Genre.all
-    @genre = Genre.find(params[:genre_id])
-    @products = Product.latest
+    if params[:genre_id]
+		  @genre = Genre.find(params[:genre_id])
+		  @products = @genre.products.where(sale_status: true)
+    else
+      @products = Product.latest
+    end
     if params[:no_tax_low_to_high]
       @products = Product.no_tax_low_to_high
     elsif params[:no_tax_high_to_low]
       @products = Product.no_tax_high_to_low
     end
+    
   end
   
   def search

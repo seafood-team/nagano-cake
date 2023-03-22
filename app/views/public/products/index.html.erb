@@ -7,15 +7,11 @@
           <th class="active">ジャンル検索</th>
         </tr>
       </thead>
-    
+
       <tbody>
         <% @genres.each do |genre| %>
           <tr>
-            <td>
-              <%= link_to products_path(:genre_id) do %>
-                <%= genre.genre_name %>
-              <% end %>
-            </td>
+            <td><%= link_to genre.genre_name, products_path(genre_id: genre.id) %></td>
           </tr>
         <% end %>
       </tbody>
@@ -28,7 +24,7 @@
         <h3 class="product-title">
           <strong>
             <% if params[:genre_id] %>
-              <%= genre_name %>
+              <%= @genre.genre_name %>
             <% else %>
               商品一覧
             <% end %>
@@ -40,7 +36,7 @@
       <div>
         <%= link_to '最新', products_path(all: true) %> |
         <%= link_to '価格が高い順', products_path(no_tax_high_to_low: "true") %> |
-        <%= link_to '価格が低い順', products_path(no_tax_low_to_high: "true") %> 
+        <%= link_to '価格が低い順', products_path(no_tax_low_to_high: "true") %>
       </div>
 
       <div class="row mt-3">
