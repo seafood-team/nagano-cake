@@ -40,19 +40,20 @@
 
     <div class='col-md-3'>
       <table class="table table-hover table-inverse table-bordered">
-        <tr>
-          <th>送料</th>
-          <td>住所</td>
-        </tr>
 
         <tr>
           <th>商品合計</th>
-          <td>住所</td>
+          <td><%= @total.to_s(:delimited) %></td>
+        </tr>
+
+        <tr>
+          <th>送料</th>
+          <td><%= @order.shipping_fee %></td>
         </tr>
 
         <tr>
           <th>請求金額</th>
-          <td><%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 --></td>
+          <td><%= @billing_amount.to_s %> <!-- お買い物の合計金額 --></td>
         </tr>
 
       </table>
@@ -62,7 +63,7 @@
 
       <div>
         <span class="font-weight-bold">支払方法</span>
-        <%= @order.payment_method %>
+        <%= @order.payment_method_i18n %>
       </div>
 
       <div>
@@ -74,6 +75,7 @@
 
       <!-- ユーザーには注文確定ボタンだけ表示 -->
       <%= form_with model: @order, local: true do |f| %>
+        <%= f.hidden_field :payment_method, value: @order.payment_method %>
         <%= f.hidden_field :post_code %>
         <%= f.hidden_field :address %>
         <%= f.hidden_field :customer_name %>
