@@ -9,6 +9,11 @@ class Public::OrdersController < ApplicationController
     @orders = Order.all
   end
 
+  def show
+    @order_detail = OrderDetail.find(params[:id])
+    @products = Product.all
+  end
+
   def create # Order に情報を保存
 
     # ログインユーザーのカートアイテムをすべて取り出して carts に入れる
@@ -82,10 +87,6 @@ class Public::OrdersController < ApplicationController
     @cart_products = current_customer.carts.all # カートアイテムの情報をユーザーに確認してもらうために使用
     @total = @cart_products.inject(0) { |sum, product| sum + product.subtotal }# 合計金額を出す処理です subtotal はモデルで定義したメソッド
 
-  end
-
-  def show
-    @order = Order.find(params[:id])
   end
 
   private
