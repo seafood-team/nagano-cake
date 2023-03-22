@@ -14,40 +14,41 @@
           </tr>
         </thead>
 
-        <% @order_details.each do |order_detail| %>
         <tbody>
+          <% @orders.each do |order| %>
           <tr>
             <!-- 注文日 -->
             <th>
-              <%= order_detail.created_at.strftime('%Y/%m/%d') %>
+              <%= order.created_at.strftime('%Y/%m/%d') %>
               <%#= image_tag cart.product.image, size:'50x50' %>
 
             </th>
 
             <!-- 配送先 -->
             <th>
-              <div>〒<%= order_detail.order.post_code %></div>
-              <div><%= order_detail.order.address %></div>
-              <div><%= order_detail.order.customer_name %></div>
+              <div>〒<%= order.post_code %></div>
+              <div><%= order.address %></div>
+              <div><%= order.customer_name %></div>
             </th>
 
             <!-- 注文商品 -->
             <th>
-              <%= order_detail.product.product_name %>
-
+              <% order.order_details.each do |order_detail| %>
+                <%= order_detail.product.product_name %>
+              <% end %>
             </th>
 
             <!-- 配送金額 -->
-            <th><%= order_detail.order.shipping_cost %></th>
+            <th><%= order.shipping_cost %></th>
 
             <!--配送ステータス-->
-            <th><%= order_detail.making_status %></th>
+            <th><%= order.order_status_i18n %></th>
 
             <!--注文詳細-->
-            <th><%= link_to "表示する", order_path(order_detail.id), class:"btn btn-primary mb-2" %></th>
+            <th><%= link_to "表示する", order_path(order.id), class:"btn btn-primary mb-2" %></th>
           </tr>
+          <% end %>
         </tbody>
-        <% end %>
       </table>
     </div>
   </div>

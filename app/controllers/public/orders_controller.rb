@@ -6,7 +6,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @order_details = OrderDetail.all
+    @orders = Order.all
+  end
+
+  def show
+    @order_detail = OrderDetail.find(params[:id])
+    @products = Product.all
   end
 
   def create # Order に情報を保存
@@ -27,7 +32,7 @@ class Public::OrdersController < ApplicationController
         # 購入が完了したらカート情報は削除するのでこちらに保存
         order_details.amount = cart.amount
         order_details.price = cart.product.with_tax_price
-        order_details.making_status = @order.payment_method
+        order_details.making_status = 0
 
         order_details.save
       end
@@ -77,15 +82,11 @@ class Public::OrdersController < ApplicationController
         render :new
       end
     else
-      redirect_to order_thanks_path
+      redirect_to order_check_path
     end
     @cart_products = current_customer.carts.all # カートアイテムの情報をユーザーに確認してもらうために使用
     @total = @cart_products.inject(0) { |sum, product| sum + product.subtotal }# 合計金額を出す処理です subtotal はモデルで定義したメソッド
 
-  end
-
-  def show
-    @order_detail = OrderDetail.find(params[:id])
   end
 
   private
