@@ -15,4 +15,9 @@ class Order < ApplicationRecord
     delivered: 4
   }
 
+  # 送料
+  def shipping_fee
+    800
+  end
+
 end
