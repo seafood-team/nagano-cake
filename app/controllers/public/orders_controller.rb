@@ -54,7 +54,7 @@ class Public::OrdersController < ApplicationController
     # 登録済みの住所を保存
       @order.post_code = current_customer.post_code
       @order.address = current_customer.city
-      @order.customer_name = (current_customer.last_name + current_customer.last_name)
+      @order.customer_name = (current_customer.last_name + current_customer.first_name)
 
     elsif params[:order][:address_number] == "2" # address_number が"2"だったときにこの処理を実行
 

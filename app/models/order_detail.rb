@@ -13,10 +13,6 @@ class OrderDetail < ApplicationRecord
   #   (no_tax * 1.1).floor
   # end
 
-  # 送料
-  def shipping_fee
-    800
-  end
 
   # 請求合計
   def billing_sum

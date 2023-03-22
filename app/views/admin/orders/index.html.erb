@@ -20,16 +20,20 @@
          <tbody>
            <% @orders.each do |order| %>
            <tr>
-             <td><%= l order.created_at %></td>
-             <td><%= order.first_name + order.last_name %></td>
+             <td>
+               <%= link_to admin_order_path(order) do %>
+               <%= l order.created_at %>
+               <% end %>
+             </td>
+             <td><%= order.customer_name %></td>
              <!-- 合計にするにはどうしたらいいのか -->
-             <% @total_amount += order.order_detail.amount %>
-             <td><%= @total_amount %></td>
-             <td><%= order.order_status %></td>
-             <!--  -->
+             <%# @total_amount += order.order_detail.amount %>
+             <td><%#= @total_amount %></td>
+             <td><%= order.order_status_i18n %></td>
+           
            </tr>
            <% end %>
-           <%= paginate orders %>
+           
          </tbody>
        </table>
       </div>
