@@ -7,6 +7,7 @@ class Public::ProductsController < ApplicationController
   
   def index
     @genres = Genre.all
+    @genre = Genre.find(params[:genre_id])
     @products = Product.latest
     if params[:no_tax_low_to_high]
       @products = Product.no_tax_low_to_high
