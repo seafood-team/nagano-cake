@@ -9,10 +9,6 @@ class OrderDetail < ApplicationRecord
     finish_making: 3
   }
 
-  # def price  #カラムの中の税込価格を計算（わからない）
-  #   (no_tax * 1.1).floor
-  # end
-
 
   # 請求合計
   def billing_sum

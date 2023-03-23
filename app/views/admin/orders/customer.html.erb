@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1>注文履歴一覧</h1>
+        <h1><%= @customer_order.first_name %>さんの注文履歴</h1>
       </div>
      </div>
      <div class ="row">
@@ -12,32 +12,27 @@
          <thead>
            <tr>
              <th class="table-active">購入日時</th>
-             <th class="table-active">購入者</th>
              <th class="table-active">注文個数</th>
              <th class="table-active">注文ステータス</th>
            </tr>
          </thead>
          <tbody>
-           <% @orders.each do |order| %>
+           <% @customer_order.orders.each do |customer_order| %>
            <tr>
              <td>
-               <%= link_to admin_order_path(order) do %>
-               <%= l order.created_at %>
+               <%= link_to admin_order_path(customer_order) do %>
+               <%= l customer_order.created_at %>
                <% end %>
              </td>
-             <td>
-               <%= link_to admin_orders_customer_path(customer_id: order.customer_id) do %>
-               <%= order.customer_name %>
-               <% end %>
-             </td>
-             <td><%= order.order_details.sum(:amount) %></td>
-             <td><%= order.order_status_i18n %></td>
+             <td><%= customer_order.order_details.sum(:amount) %></td>
+             <td><%= customer_order.order_status_i18n %></td>
            </tr>
            <% end %>
-           
+
          </tbody>
        </table>
       </div>
     </div>
+
   </div>
 </html>
