@@ -1,0 +1,30 @@
+// Place all the styles related to the clients/products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top-image {
+  background-image: image-url('top.jpg');
+  width: 700px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+
+h5 {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+}
+
+.center {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+  -webkit-text-stroke: 3px gold; 
+  text-stroke: 3px gold;
+}
+
+.new-product {
+  font-weight: bold;
+  margin: 10px 0;
+}
