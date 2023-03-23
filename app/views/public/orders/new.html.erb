@@ -25,7 +25,7 @@
       <%= f.radio_button :address_number, 1, {:checked => true} %><!-- address_number と定義して1～3の番号を check に送ります -->
       <%= f.label :address_number_1, "ご自身の住所" %><br>
       <!--郵便番号-->
-      <%= current_customer.post_code %>
+      〒<%= current_customer.post_code %>
       <!--住所-->
       <%= current_customer.city %><br>
       <!--名前-->
