@@ -1,24 +1,29 @@
-<%= render 'layouts/errors', obj: @shipping_address %>
-
-<h2>配送先登録/一覧</h2>
-
-<!--shipping_addressに送信する-->
-<%= form_with model: @shipping_address do |f| %>
-
-  <div>
-    <%= f.label :"郵便番号(ハイフンなし)" %>
-    <%= f.text_field :shipping_post_code, autofocus: true%>
-  </div>
-
-  <div>
-    <%= f.label :"住所" %>
-    <%= f.text_field :shipping_address, autofocus: true%>
-  </div>
-
-  <div>
-    <%= f.label :"宛名" %>
-    <%= f.text_field :shipping_name, autofocus: true %>
-  </div>
-
-  <div><%= f.submit "変更内容を保存" %></div>
-<% end %>
+<div class="container">
+  <%= render 'layouts/errors', obj: @shipping_address %>
+  
+  <h3>配送先登録/一覧</h3>
+  
+  <!--shipping_addressに送信する-->
+  <%= form_with model: @shipping_address do |f| %>
+  
+    <div class="col-10">
+      <div class="col-12">
+        <%= f.label :"郵便番号(ハイフンなし)", class: "col-3" %>
+        <%= f.text_field :shipping_post_code, autofocus: true%>
+      </div>
+  
+    <div class="col-12">
+      <%= f.label :"住所", class: "col-3" %>
+      <%= f.text_field :shipping_address, autofocus: true, class: "col-8"%>
+    </div>
+  
+    <div class="col-12">
+      <%= f.label :"宛名", class: "col-3" %>
+      <%= f.text_field :shipping_name, autofocus: true %>
+      <div class="text-right">
+      <%= f.submit "変更内容を保存", class: "btn btn-success" %>
+      </div>
+    </div>
+    </div>
+  <% end %>
+</div>
