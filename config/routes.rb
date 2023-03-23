@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
     get "/" => "homes#top"
-    resources :orders, only: [:show, :update, :index]
+    get "orders/customer" => "orders#customer"
+    resources :orders, only: [:show, :update, :index, :customer]
     resources :order_details, only: [:update]
     resources :products, only: [:index, :new, :show, :create, :edit, :update]
     resources :genres, only: [:index, :edit, :create, :update]
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
     post 'order/check' => 'orders#check'
     get 'order/thanks' => 'orders#thanks'
     delete "/carts/destroy_all" => "carts#destroy_all"
-    resources :carts, only: [:index, :update, :destroy, :create] 
+    resources :carts, only: [:index, :update, :destroy, :create]
     get "/search" => "products#search"
   end
 
