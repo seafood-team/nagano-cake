@@ -1,10 +1,11 @@
 <div class='container'>
+  <h2>注文情報入力</h2>
   <div class='row'>
 
     <!-- @order でラジオボタンを使って情報を送る -->
     <%= form_with model: @order, url: order_check_path, local: true do |f| %>
 
-    <h3>支払方法</h3>
+    <h4>支払方法</h4>
     <!-- クレジットカードで支払う場合 -->
     <div>
       <%= f.radio_button :payment_method, :credit_card, {:checked => true} %> <!-- payment_number と定義して1～2の番号を check に送ります -->
@@ -18,7 +19,7 @@
 
 
 
-    <h3>お届け先</h3>
+    <h4>お届け先</h4>
 
     <!-- 顧客の住所の場合 -->
     <div>
@@ -38,7 +39,7 @@
       <%= f.label :address_number_2, "登録済み住所から選択" %><br>
       <!--配送先住所一覧-->
 
-      <%= f.select :registered, options_from_collection_for_select(ShippingAddress.all, :id, :address_display) %>
+      <%= f.select :registered, options_from_collection_for_select(@current_address, :id, :address_display) %>
     </div><br>
 
     <!--新しいお届け先を追加する場合-->
