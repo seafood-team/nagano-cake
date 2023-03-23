@@ -9,7 +9,7 @@
            <tr>
              <td>購入者</td>
              <td>
-               <%= link_to admin_orders_customer_path do %>
+               <%= link_to admin_orders_customer_path(customer_id: @order.customer_id) do %>
                <%= @order.customer.last_name + @order.customer.first_name %>
                <% end %>
              </td>
@@ -29,7 +29,7 @@
            </tr>
            <tr>
              <td>注文ステータス</td>
-             <%= form_with model: @order, url: admin_order_path(@order), method: :post do |f| %>
+             <%= form_with model: @order, url: admin_order_path(@order), method: :patch do |f| %>
              <td><%= f.select :order_status, Order.order_statuses_i18n.invert %></td>
              <td><%= f.submit "更新", class:"btn btn-success" %></td>
              <% end %>
@@ -56,15 +56,15 @@
                <td><%= order_detail.price %></td>
                <td><%= order_detail.amount %></td>
                <td><%= order_detail.order_subtotal_price %></td>
-              <% end %>
-               <%#= form_with model: @order_detail, url: admin_order_detail_path(@order_detail), method: :post do |f| %>
-               <td>
-                  <%#= f.select :making_status, OrderDetail.making_status_i18n.invert  %>
-                  <%#= f.submit "更新", class:"btn btn-success" %>
-               </td>
-               <%# end %>
-             </tr>
 
+               <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
+               <td>
+                  <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert  %>
+                  <%= f.submit "更新", class:"btn btn-success" %>
+               </td>
+               <% end %>
+             </tr>
+             <% end %>
            </tbody>
          </table>
         </div>
