@@ -36,25 +36,27 @@
 
       <tbody>
         <% @shipping_addresses.each do |address| %>
-        <tr>
-          <!--郵便番号-->
-          <td><%= address.shipping_post_code %></td>
+          <% if address.customer_id == current_customer.id %>
+          <tr>
+            <!--郵便番号-->
+            <td><%= address.shipping_post_code %></td>
 
-          <!--住所-->
-          <td><%= address.shipping_address %></td>
+            <!--住所-->
+            <td><%= address.shipping_address %></td>
 
-          <!--宛名-->
-          <td><%= address.shipping_name %></td>
+            <!--宛名-->
+            <td><%= address.shipping_name %></td>
 
-          <!--editページへ飛ぶ-->
-          <td><%= link_to "編集", edit_shipping_address_path(address.id), class:"btn btn-success px-4 mb-2" %></td>
+            <!--editページへ飛ぶ-->
+            <td><%= link_to "編集", edit_shipping_address_path(address.id), class:"btn btn-success px-4 mb-2" %></td>
 
-          <!--配送先を削除する-->
-          <td>
-            <%= button_to "削除", shipping_address_path(address.id), method: :delete,
-            "data-confirm" => "本当に削除しますか？" ,class:"btn btn-success px-4 mb-2" %>
-          </td>
-        </tr>
+            <!--配送先を削除する-->
+            <td>
+              <%= button_to "削除", shipping_address_path(address.id), method: :delete,
+              "data-confirm" => "本当に削除しますか？" ,class:"btn btn-success px-4 mb-2" %>
+            </td>
+          </tr>
+          <% end %>
         <% end %>
       </tbody>
 
