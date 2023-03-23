@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     post 'order/check' => 'orders#check'
     get 'order/thanks' => 'orders#thanks'
     delete "/carts/destroy_all" => "carts#destroy_all"
-    resources :carts, only: [:index, :update, :destroy, :create] 
+    resources :carts, only: [:index, :update, :destroy, :create]
     get "/search" => "products#search"
   end
 
