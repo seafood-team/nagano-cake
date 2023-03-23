@@ -1,8 +1,39 @@
-<div class='pt-32 pb-12 md:pt-40 md:pb-20'>
-  <div class='pb-12 text-center md:pb-16'>
-    <h1 class='leading-tighter mb-4 text-7xl font-extrabold tracking-tighter md:text-8xl'>
-      <span class='p-2 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent'>
-        NaganoCake
-      </span>
-    </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+     <%= render 'public/products/genre_sidebar', genres: @genres %>
+    </div>
     
+    <div class="col-10">
+      <div class="top-image"></div>
+      <h5 class="center">
+        ようこそ、ながのCAKREへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員でない方も閲覧はできますが、<br>
+        購入には会員登録が必要になります。
+      </h5>
+      <h5>
+        ようこそ、ながのCAKREへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員でない方も閲覧はできますが、<br>
+        購入には会員登録が必要になります。
+      </h5>
+      
+      <h3 class="new-product">新着商品</h3>
+      <div class="row mt-3">
+        <% @products.each do |product| %>
+          <div class="col">
+            <%= link_to product_path(product.id) do %>
+            <%= image_tag product.get_image, size: "200x150" %><br>
+            <%= product.product_name %><br>
+            <% end %>
+            ¥<%= product.no_tax %>(税抜)
+          </div>
+        <% end %>
+      </div>
+      <div class="text-right mt-3">
+        <%= link_to "すべての商品を見る>", products_path %>
+      </div>
+    </div>
+  </div>
+</div>
