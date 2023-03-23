@@ -8,7 +8,11 @@
          <table>
            <tr>
              <td>購入者</td>
-             <td><%= @order.customer.last_name + @order.customer.first_name %></td>
+             <td>
+               <%= link_to admin_orders_customer_path do %>
+               <%= @order.customer.last_name + @order.customer.first_name %>
+               <% end %>
+             </td>
            </tr>
            <tr>
              <td>注文日</td>
@@ -52,11 +56,10 @@
                <td><%= order_detail.price %></td>
                <td><%= order_detail.amount %></td>
                <td><%= order_detail.order_subtotal_price %></td>
-               <%# @total_price += order_detail.order_subtotal_price %>
               <% end %>
-               <%#= form_with model: @order_detail, url: admin_order_detail_path(order_detail), method: :post do |f| %>
+               <%#= form_with model: @order_detail, url: admin_order_detail_path(@order_detail), method: :post do |f| %>
                <td>
-                  <%#= f.select :making_status, OrderDetail.making_status_i18n %>
+                  <%#= f.select :making_status, OrderDetail.making_status_i18n.invert  %>
                   <%#= f.submit "更新", class:"btn btn-success" %>
                </td>
                <%# end %>
@@ -69,15 +72,15 @@
          <table class="ordertotals">
            <tr>
              <th>商品合計</th>
-             <td><%= @order.shipping_cost %></td>
+             <td><%= @order.shipping_cost.to_s %>円</td>
            </tr>
            <tr>
              <th>送料</th>
-             <td><%= @order.shipping_fee %></td>
+             <td><%= @order.shipping_fee.to_s %>円</td>
            </tr>
            <tr>
              <th>請求金額合計</th>
-             <td><%= @order.shipping_cost + @order.shipping_fee %></td>
+             <td><%= @order.shipping_cost + @order.shipping_fee %>円</td>
            </tr>
          </table>
         </div>
