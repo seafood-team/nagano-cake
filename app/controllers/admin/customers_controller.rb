@@ -15,8 +15,12 @@ class Admin::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to admin_customer_path(@customer), notice: 'Successfully updated customer status'
+    if @customer.update(customer_params)
+      flash[:notice] = "Customer was successfully updated"
+      redirect_to admin_customer_path
+    else
+      render "edit"
+    end
   end
 
   private
@@ -26,6 +30,6 @@ class Admin::CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:is_deleted, :last_name, :first_name, :first_name_kana, :last_name_kana, :post_code, :city, :telephone)
+    params.require(:customer).permit(:is_deleted, :last_name, :first_name, :first_name_kana, :last_name_kana, :post_code, :city, :telephone, :email)
   end
 end
