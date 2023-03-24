@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1><%= @customer_order.first_name %>さんの注文履歴</h1>
+        <h1><%= @customer_order.last_name + @customer_order.first_name %>さんの注文履歴</h1>
       </div>
      </div>
      <div class ="row">
@@ -17,7 +17,7 @@
            </tr>
          </thead>
          <tbody>
-           <% @customer_order.orders.each do |customer_order| %>
+           <% @customer_orders.each do |customer_order| %>
            <tr>
              <td>
                <%= link_to admin_order_path(customer_order) do %>
@@ -28,7 +28,7 @@
              <td><%= customer_order.order_status_i18n %></td>
            </tr>
            <% end %>
-
+           <%= paginate @customer_orders %>
          </tbody>
        </table>
       </div>

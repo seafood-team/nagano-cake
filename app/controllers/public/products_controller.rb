@@ -12,7 +12,7 @@ class Public::ProductsController < ApplicationController
 		  @genre = Genre.find(params[:genre_id])
 		  @products = @genre.products.where(sale_status: true)
     else
-      @products = Product.latest
+      @products = Product.latest.page(params[:page]).per(8)
     end
     if params[:no_tax_low_to_high]
       @products = Product.no_tax_low_to_high
@@ -23,7 +23,7 @@ class Public::ProductsController < ApplicationController
   end
   
   def search
-    @products = Product.page(params[:page]).per(5)
+    @products = Product.page(params[:page]).per(10)
     @word_for_search = Genre.find(params[:word_for_search])
     @search_products = Product.where(genre: params[:word_for_search])
   end
