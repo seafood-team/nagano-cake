@@ -2,7 +2,7 @@ class Public::ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @cart = Cart.new
+    @cart = Cart
     @genres = Genre.all
   end
 
