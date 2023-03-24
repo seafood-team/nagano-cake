@@ -1,22 +1,48 @@
-<div class="container mt-5 mb-5">
-	<div class="row text-center text-xs-center text-sm-left text-md-left ">
-    <div class="col-xs-12 col-sm-6 col-md-6 mx-auto text-right">
+<div class="container">
+	<div class="row ">
+    <div class="col">
       <h2>商品詳細</h2>
-     <%= image_tag @product.get_image, size: "330x330" %>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-6 item-details mx-auto">
-      <h2><strong>商品名：<%= @product.product_name %></strong></h2>
-      <h4>商品説明　<%= simple_format(@product.introduct)%></h4>
-      <h4>ジャンル：<%= @product.genre.genre_name %></h4>
-      <%  if @product.sale_status %>
-        <p class="text-success">販売中</p>
-      <% else %>
-        <h3 class="text-danger">販売停止中</h3>
-      <% end %>
-      <h3>¥ <%= (@product.no_tax * 1.1).floor.to_s(:delimited) %> (税込)</h3>
-      <h3>¥ <%= @product.no_tax %>  税抜</h3>
+  </div>
+    <div class ="row">
+      <div class ="col">
+         <%= image_tag @product.get_image, size: "330x330" %>
+      </div>
+    
+    <div class="col">
+      <table>
+        <tr>
+          <th>商品名</th>
+          <td><%= @product.product_name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= simple_format(@product.introduct)%></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @product.genre.genre_name %></td>
+        </tr>
+        <tr>
+          <th>税込価格(税抜価格)</th>
+          <td>
+            <%= (@product.no_tax * 1.1).floor.to_s(:delimited) %>(<%= @product.no_tax %>)円
+          </td>
+        </tr>
+        <tr>
+          <th>販売ステータス</th>
+          <td>
+            <%  if @product.sale_status %>
+               <p class="text-success">販売中</p>
+            <% else %>
+               <p class="text-danger">販売停止中</p>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      
       <%= link_to "編集する", edit_admin_product_path(@product), class:"btn btn-success" %>
-      <%= button_to '削除する', admin_product_path(@product.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger"  %>
-      </div> 
+      <%#= button_to '削除する', admin_product_path(@product.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger"  %>
+    </div>
   </div>
 </div>
