@@ -59,29 +59,37 @@
       </table>
     </div>
 
-    <div class='col-md-3'>
+    <div class='col-md-6'>
+      <table class="table">
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method_i18n %></td>
+        </tr>
 
-      <div>
-        <span class="font-weight-bold">支払方法</span>
-        <%= @order.payment_method_i18n %>
-      </div>
+        <tr>
+          <th>お届け先</th>
+          <td>
+            〒<%= @order.post_code %>
+            <%= @order.address %>
+          </td>
+        </tr>
 
-      <div>
-        <span class="font-weight-bold">お届け先</span>
-        〒<%= @order.post_code %>
-        <%= @order.address %>
-        <%= @order.customer_name %>
-      </div>
-
-      <!-- ユーザーには注文確定ボタンだけ表示 -->
-      <%= form_with model: @order, local: true do |f| %>
-        <%= f.hidden_field :payment_method, value: @order.payment_method %>
-        <%= f.hidden_field :post_code %>
-        <%= f.hidden_field :address %>
-        <%= f.hidden_field :customer_name %>
-        <%= f.hidden_field :shipping_cost, value: @total %>
-        <%= f.submit "注文を確定する" %>
-      <% end %>
+        <tr>
+          <th></th>
+          <td><%= @order.customer_name %></td>
+        </tr>
+      </table>
     </div>
+  </div>
+  <!-- ユーザーには注文確定ボタンだけ表示 -->
+  <div class="text-center">
+    <%= form_with model: @order, local: true do |f| %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :post_code %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :customer_name %>
+      <%= f.hidden_field :shipping_cost, value: @total %>
+      <%= f.submit "注文を確定する", class:"btn btn-success px-4 mb-2" %>
+    <% end %>
   </div>
 </div>

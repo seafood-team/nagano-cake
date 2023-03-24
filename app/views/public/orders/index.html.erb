@@ -15,14 +15,11 @@
         </thead>
 
         <tbody>
-          <% @orders.each do |order| %>
-            <% if order.customer_id == current_customer.id %>
+          <% @current_orders.each do |order| %>
             <tr>
               <!-- 注文日 -->
               <th>
                 <%= order.created_at.strftime('%Y/%m/%d') %>
-                <%#= image_tag cart.product.image, size:'50x50' %>
-
               </th>
 
               <!-- 配送先 -->
@@ -48,8 +45,8 @@
               <!--注文詳細-->
               <th><%= link_to "表示する", order_path(order.id), class:"btn btn-primary mb-2" %></th>
             </tr>
-            <% end %>
           <% end %>
+          <%= paginate @current_orders %>
         </tbody>
       </table>
     </div>
