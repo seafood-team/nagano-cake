@@ -34,6 +34,15 @@
 
       <thead>
         <tr>
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+        </tr>
+      </thead>
+
+  <tbody>
+    <% @shipping_addresses.each do |address| %>
+        <tr>
           <!--郵便番号-->
           <td><%= address.shipping_post_code %></td>
 
@@ -52,7 +61,8 @@
             "data-confirm" => "本当に削除しますか？" ,class:"btn btn-danger px-4 mb-2" %>
           </td>
         </tr>
-      <% end %>
+  <% end %>
     </tbody>
   </table>
+</div>
 </div>
