@@ -30,6 +30,7 @@
                           <td><%= link_to "編集する", edit_admin_genre_path(genre), class:"btn btn-success"%></td>
                         </tr>
                         <% end %>
+                        <%= paginate @genres %>
                       </tbody>
                 </table>
              </div>
