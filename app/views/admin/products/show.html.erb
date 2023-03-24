@@ -5,14 +5,16 @@
      <%= image_tag @product.get_image, size: "150x150" %>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6 item-details mx-auto">
-      <h2><strong><%= @product.product_name %></strong></h2>
-      <h4><%= simple_format(@product.introduct)%></h4>
+      <h2><strong>商品名：<%= @product.product_name %></strong></h2>
+      <h4>商品説明　<%= simple_format(@product.introduct)%></h4>
+      <h4>ジャンル：<%= @product.genre.genre_name %></h4>
       <%  if @product.sale_status %>
         <p class="text-success">販売中</p>
       <% else %>
         <h3 class="text-danger">販売停止中</h3>
       <% end %>
-      <h3>¥ <%= @product.no_tax %> (税込)</h3>
+      <h3>¥ <%= (@product.no_tax * 1.1).floor.to_s(:delimited) %> (税込)</h3>
+      <h3>¥ <%= @product.no_tax %>  税抜</h3>
       <%= link_to "編集する", edit_admin_product_path(@product), class:"btn btn-success" %>
       <%= button_to '削除する', admin_product_path(@product.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger"  %>
       </div> 
