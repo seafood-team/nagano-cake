@@ -2,7 +2,6 @@
   <%= render 'layouts/errors', obj: @shipping_address %>
 
   <h2>配送先登録/一覧</h2>
-  <div class='row'>
     <!--shipping_addressに送信する-->
     <%= form_with model: @shipping_address do |f| %>
       <div class='row'>
@@ -31,6 +30,16 @@
   <% end %>
 
     <table class="table table-hover table-inverse table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @shipping_addresses.each do |address| %>
 
       <thead>
         <tr>
