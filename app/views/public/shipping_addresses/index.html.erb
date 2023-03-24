@@ -2,7 +2,7 @@
   <%= render 'layouts/errors', obj: @shipping_address %>
 
   <h2>配送先登録/一覧</h2>
-    <div class='row'>
+  <div class='row'>
     <!--shipping_addressに送信する-->
     <%= form_with model: @shipping_address do |f| %>
 
@@ -23,43 +23,40 @@
 
       <div><%= f.submit "新規登録" %></div>
     <% end %>
-
-    <table class="table table-hover table-inverse table-bordered">
-
-      <thead>
-        <tr>
-          <th>郵便番号</th>
-          <th>住所</th>
-          <th>宛名</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @shipping_addresses.each do |address| %>
-          <% if address.customer_id == current_customer.id %>
-          <tr>
-            <!--郵便番号-->
-            <td><%= address.shipping_post_code %></td>
-
-            <!--住所-->
-            <td><%= address.shipping_address %></td>
-
-            <!--宛名-->
-            <td><%= address.shipping_name %></td>
-
-            <!--editページへ飛ぶ-->
-            <td><%= link_to "編集", edit_shipping_address_path(address.id), class:"btn btn-success px-4 mb-2" %></td>
-
-            <!--配送先を削除する-->
-            <td>
-              <%= button_to "削除", shipping_address_path(address.id), method: :delete,
-              "data-confirm" => "本当に削除しますか？" ,class:"btn btn-success px-4 mb-2" %>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-
-    </table>
   </div>
+  <%= paginate @shipping_addresses %>
+  <table class="table table-hover table-inverse table-bordered">
+
+    <thead>
+      <tr>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>宛名</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @shipping_addresses.each do |address| %>
+        <tr>
+          <!--郵便番号-->
+          <td><%= address.shipping_post_code %></td>
+
+          <!--住所-->
+          <td><%= address.shipping_address %></td>
+
+          <!--宛名-->
+          <td><%= address.shipping_name %></td>
+
+          <!--editページへ飛ぶ-->
+          <td><%= link_to "編集", edit_shipping_address_path(address.id), class:"btn btn-success px-4 mb-2" %></td>
+
+          <!--配送先を削除する-->
+          <td>
+            <%= button_to "削除", shipping_address_path(address.id), method: :delete,
+            "data-confirm" => "本当に削除しますか？" ,class:"btn btn-success px-4 mb-2" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

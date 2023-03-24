@@ -4,12 +4,13 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
 
     # 現在ログインしているユーザーの登録している配送先を出すための値
-    @current_address = ShippingAddress.all
-    @current_address = @current_address.where(customer_id: current_customer.id)
+    @current_addresses = ShippingAddress.all
+    @current_addresses = @current_addresses.where(customer_id: current_customer.id)
   end
 
   def index
-    @orders = Order.all
+    @current_orders = Order.page(params[:page]).per(5)
+    @current_orders = @current_orders.where(customer_id: current_customer.id)
   end
 
   def show

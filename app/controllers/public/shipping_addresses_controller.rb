@@ -2,7 +2,8 @@ class Public::ShippingAddressesController < ApplicationController
 
   def index
     @shipping_address = ShippingAddress.new
-    @shipping_addresses = ShippingAddress.all
+    @shipping_addresses = ShippingAddress.page(params[:page]).per(3)
+    @shipping_addresses = @shipping_addresses.where(customer_id: current_customer.id)
   end
 
   def create
