@@ -9,7 +9,7 @@
    <table>
             <tr>
                 <div class= "from-group">
-                    <th><% f.label :商品画像 %></th>
+                    <th>商品画像<% f.label :商品画像 %></th>
                     <th><%= f.file_field :image, accept: 'image/*' %></th>
                 </div>
             </tr>
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <div class="form-group">
-                    <th><% f.label :商品説明文 %></th>
+                    <th>商品説明文<% f.label :商品説明文 %></th>
                     <td><%= f.text_area :introduct, size: "50x8", placeholder:"ここにケーキ類などの説明文を記述します" %></td>
                 </div>
             </tr>
