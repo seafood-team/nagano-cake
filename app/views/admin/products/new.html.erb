@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>商品新規登録</h2>
+    </div>
+    <div class= "row">
+        <div class="col-sm-2 px-sm-0" >
+        <%= form_with model: @products, url: admin_products_path, local: true do |f| %>
+        <table>
+            <tr>
+                <div class= "from-group">
+                    <th><% f.label :商品画像 %></th>
+                    <th><%= f.file_field :image,  accept: 'image/*' %></th>
+                </div>
+            </tr>
+            <tr>
+                <div class= "from-group">
+                    <th><%= f.label :商品名 %></th>
+                    <td><%= f.text_field :product_name, placeholder:"商品名" %></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><% f.label :商品説明文 %></th>
+                    <td><%= f.text_area :introduct, size: "50x8", placeholder:"ここにケーキ類などの説明文を記述します" %></td>
+                </div>
+            </tr>
+            <tr>
+                <th><%= f.label :ジャンル %></th>
+                <td><%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => "--選択してください--" %></td>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :税抜価格 %></th>
+                    <td><%= f.text_field :no_tax, placeholder:"0000" %>円</td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :販売ステータス %></th>
+                    <td><%= f.radio_button :sale_status, true, checked: true %>
+                    <%= f.label :sale_status, "販売中" %>
+                    <%= f.radio_button :sale_status, false %>
+                    <%= f.label :sale_status, "販売停止中" %>
+                    </td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-action">
+                    <th><%= f.submit "登録する",class:"btn btn-success" %></th>
+                </div>
+            </tr>
+        <% end %>
+        </table>
+        </div>
+    </div>

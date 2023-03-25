@@ -5,18 +5,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/5667bc939f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
 
 
   <body>
-    <header>
+    <header class="border-bottom border-dark">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
+          <a class="navbar-brand" href="/"><h3>Nagano-Cake</h3></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -26,108 +25,124 @@
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
               <li class="nav-item">
-                <%= link_to admin_items_path do %>
-                  <i class="">商品一覧</i>
+                <%= link_to admin_products_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to admin_customers_path do %>
-                  <i class="">会員一覧</i>
+                <%= link_to admin_customers_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-users"></i>会員一覧
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to admin_path  do %>
-                  <i class="">注文履歴一覧</i>
+                <%= link_to admin_orders_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-list"></i>注文履歴一覧
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to admin_genres_path do%>
-                  <i class="">ジャンル一覧</i>
+
+                <%= link_to admin_genres_path, class: 'btn btn-info mr-2' do%>
+                  <i class="fas fa-tags"></i>ジャンル一覧
                 <% end %>
+
               </li>
               <li class="nav-item">
-                <%= link_to destroy_admin_session_path, method: :get do %>
-                  <i class="">ログアウト</i>
+                <%= link_to destroy_admin_session_path, method: :get, class: 'btn btn-info' do %>
+                  <i class="fas fa-sign-out-alt"></i>ログアウト
                 <% end %>
               </li>
-              
+              <li class="mt-0">
+                <%= form_with url: admin_admin_search_path, method: :get, local: true do |f| %>
+                  <%= f.collection_select :word_for_search, Genre.all, :id, :genre_name %>
+                  <%= f.submit "検索",class: "btn btn-info btn-sm" %>
+                <% end %>
+              </li>
 
             <!--customersログイン時のヘッダー-->
             <% elsif customer_signed_in? %>
-              <li class="nav-item">
+              <li class="nav-item mr-2">
                 ようこそ <%= link_to customers_path do %>
                 <strong><%= current_customer.last_name %><%= current_customer.first_name %></strong>
                 <% end %>
                  さん
               </li>
               <li class="nav-item">
-                <%= link_to customers_path do %>
-                  <i class="">マイページ</i>
+                <%= link_to customers_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-user"></i>マイページ
                 <% end %>
               </li>
               <li class="nav-item">
-                <%#= link_to  items_path do %>
-                  <i class="">商品一覧</i>
-                <%# end %>
-              </li>
-              <li class="nav-item">
-                <%#= link_to cart_items_path do %>
-                  <i class="">カート</i>
-                <%# end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to destroy_customer_session_path, method: :get do %>
-                  <i class="">ログアウト</i>
+                <%= link_to  products_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
-               <% else %>
+              <li class="nav-item">
+                <%= link_to carts_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-cart-arrow-down"></i>カート
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_customer_session_path, method: :get, class: 'btn btn-info' do %>
+                  <i class="fas fa-sign-out-alt"></i>ログアウト
+                <% end %>
+              </li>
+              <li class="mt-0">
+                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                  <%= f.collection_select :word_for_search, Genre.all, :id, :genre_name %>
+                  <%= f.submit "検索",class: "btn btn-info btn-sm" %>
+                <% end %>
+              </li>
+
             <!--ログイン前時のヘッダー-->
-              <li class="">
-                <%#= link_to about_path do %>
-                  <i class="">About</i>
-                <%# end %>
-              </li>
+              <% else %>
               <li class="nav-item">
-                <%#= link_to items_path do %>
-                  <i class="">商品一覧</i>
-                <%# end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to new_customer_registration_path, data: {"turbolinks" => false} do %>
-                  <i class="">新規登録</i>
+                <%= link_to about_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-store-alt"></i>About
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to  new_customer_session_path do%>
-                  <i class="">ログイン</i>
+                <%= link_to products_path, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
-              <li class="mt-3">
-                <%#= form_with url: search_path, method: :get, local: true do |f| %>
-                  <%#= f.collection_select :word_for_search, Genre.all, :id, :name %>
-                  <%#= f.submit "検索" %>
-                <%# end %>
+              <li class="nav-item">
+                <%= link_to new_customer_registration_path, data: {"turbolinks" => false}, class: 'btn btn-info mr-2' do %>
+                  <i class="fas fa-user-plus"></i>新規登録
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  new_customer_session_path, class: 'btn btn-info mr-2' do%>
+                  <i class="fas fa-sign-in-alt"></i>ログイン
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  new_admin_session_path, class: 'btn btn-info' do%>
+                  <i class="fas fa-sign-in-alt"></i>管理者用
+                <% end %>
+              </li>
+              <li class="mt-0">
+                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                  <%= f.collection_select :word_for_search, Genre.all, :id, :genre_name %>
+                  <%= f.submit "検索",class: "btn btn-info btn-sm" %>
+                <% end %>
               </li>
             <% end %>
             </ul>
+
           </div>
         </div>
       </nav>
     </header>
+
     <div class="container">
-  			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-        <% flash.each do |key, value| %>
-          <p class="alert alert-<%= key %>">
-            <%= sanitize value, tags: %w(br) %>
-          </p>
-        <% end %>
-      </div>
+  			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5"></div>
     </div>
     <main>
+      <%= flash[:success] %>
       <%= yield %>
     </main>
-    <footer>
-      
+    <footer class="border-bottom border-dark pb-5">
+
     </footer>
   </body>
 </html>

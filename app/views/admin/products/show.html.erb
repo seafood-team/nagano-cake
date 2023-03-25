@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="row ">
+    <div class="col">
+      <h2>商品詳細</h2>
+    </div>
+  </div>
+    <div class ="row">
+      <div class ="col">
+         <%= image_tag @product.get_image, size: "330x330" %>
+      </div>
+    
+    <div class="col">
+      <table>
+        <tr>
+          <th>商品名</th>
+          <td><%= @product.product_name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= simple_format(@product.introduct)%></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @product.genre.genre_name %></td>
+        </tr>
+        <tr>
+          <th>税込価格(税抜価格)</th>
+          <td>
+            <%= (@product.no_tax * 1.1).floor.to_s(:delimited) %>(<%= @product.no_tax %>)円
+          </td>
+        </tr>
+        <tr>
+          <th>販売ステータス</th>
+          <td>
+            <%  if @product.sale_status %>
+               <p class="text-success">販売中</p>
+            <% else %>
+               <p class="text-danger">販売停止中</p>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      
+      <%= link_to "編集する", edit_admin_product_path(@product), class:"btn btn-success" %>
+      <%#= button_to '削除する', admin_product_path(@product.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger"  %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class='container'>
+  <h2>注文履歴詳細</h2>
+    <div class='row'>
+
+      <div class='col-md-6'>
+        <table class="table table-hover table-inverse table-bordered">
+          <thead>
+            <p class="font-weight-bold">注文情報</p>
+            <tr>
+              <th class='col-md-2'>注文日</th>
+              <th class='col-md-4'><%= @order.created_at.strftime('%Y/%m/%d') %></th>
+            </tr>
+            <tr>
+              <th class='col-md-2'>配送先</th>
+              <th class='col-md-4'>
+                <div>〒<%= @order.post_code %></div>
+                <div><%= @order.address %></div>
+                <div><%= @order.customer_name %></div>
+              </th>
+            </tr>
+            <tr>
+              <th class='col-md-2'>支払方法</th>
+              <th class='col-md-4'><%= @order.payment_method_i18n %></th>
+            </tr>
+            <tr>
+              <th class='col-md-2'>ステータス</th>
+              <th class='col-md-4'><%= @order.order_status_i18n %></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class='col-md-4'>
+        <table class="table table-hover table-inverse table-bordered">
+          <thead>
+            <p class="font-weight-bold">請求情報</p>
+            <tr>
+              <th class='col-md-2'>商品合計</th>
+              <th class='col-md-4'><%= @order.shipping_cost %></th>
+            </tr>
+            <tr>
+              <th class='col-md-2'>配送料</th>
+              <th class='col-md-4'>
+                <div><%= @order.shipping_fee %></div>
+              </th>
+            </tr>
+            <tr>
+              <th class='col-md-2'>ご請求額</th>
+              <th class='col-md-4'><div><%= @order.shipping_cost + @order.shipping_fee %></div></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class='col-md-10'>
+        <table class="table table-hover table-inverse table-bordered">
+            <p class="font-weight-bold">注文内容</p>
+            <thead>
+              <tr>
+                <th class='col-md-4'>商品</th>
+                <th class='col-md-2'>単価(税込)</th>
+                <th class='col-md-1'>個数</th></th>
+                <th class='col-md-1'>小計</th>
+              </tr>
+              <% @order.order_details.each do |order| %>
+              <tr>
+                <th class='col-md-4'>
+                  <%= order.product.product_name %>
+                </th>
+                <th class='col-md-2'><%= order.price %></th>
+                <th class='col-md-1'><%= order.amount %></th>
+                <th class='col-md-1'><%= order.price * order.amount %></th>
+              </tr>
+              <% end %>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

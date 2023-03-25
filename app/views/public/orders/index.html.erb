@@ -1,0 +1,54 @@
+<div class='container'>
+  <h2>注文情報確認</h2>
+    <div class='row'>
+
+      <table class="table table-hover table-inverse table-bordered">
+        <thead>
+          <tr>
+            <th class='col-md-1'>注文日</th>
+            <th class='col-md-3'>配送先</th>
+            <th class='col-md-1'>注文商品</th>
+            <th class='col-md-1'>支払い金額</th>
+            <th class='col-md-1'>ステータス</th>
+            <th class='col-md-1'>注文詳細</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @current_orders.each do |order| %>
+            <tr>
+              <!-- 注文日 -->
+              <th>
+                <%= order.created_at.strftime('%Y/%m/%d') %>
+              </th>
+
+              <!-- 配送先 -->
+              <th>
+                <div>〒<%= order.post_code %></div>
+                <div><%= order.address %></div>
+                <div><%= order.customer_name %></div>
+              </th>
+
+              <!-- 注文商品 -->
+              <th>
+                <% order.order_details.each do |order_detail| %>
+                  <%= order_detail.product.product_name %>
+                <% end %>
+              </th>
+
+              <!-- 配送金額 -->
+              <th><%= order.shipping_cost %></th>
+
+              <!--配送ステータス-->
+              <th><%= order.order_status_i18n %></th>
+
+              <!--注文詳細-->
+              <th><%= link_to "表示する", order_path(order.id), class:"btn btn-primary mb-2" %></th>
+            </tr>
+          <% end %>
+          <%= paginate @current_orders %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
